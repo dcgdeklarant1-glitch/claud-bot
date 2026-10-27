@@ -22,22 +22,49 @@ class Conv(StatesGroup):
 # ---------- CBU kurslari (1 soat keshlanadi) ----------
 _cache = {"rates": None, "ts": 0}
 
+FALLBACK_URL = "https://open.er-api.com/v6/latest/UZS"
+# Ba'zi saytlar aiohttp ning standart User-Agent'ini bloklaydi
+HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; DCGinfoBot/1.0)", "Accept": "application/json"}
+
+
+async def _fetch_json(url: str):
+    async with aiohttp.ClientSession(headers=HEADERS) as s:
+        async with s.get(url, timeout=aiohttp.ClientTimeout(total=20)) as r:
+            r.raise_for_status()
+            return await r.json(content_type=None)
+
+
+async def _from_cbu() -> dict:
+    data = await _fetch_json(CBU_URL)
+    rates = {x["Ccy"]: {"rate": float(x["Rate"]), "diff": float(x["Diff"] or 0),
+                        "nominal": int(x["Nominal"]), "date": x["Date"], "src": "cbu"}
+             for x in data if x["Ccy"] in CURRENCIES}
+    if "USD" not in rates:
+        raise ValueError("CBU javobida USD yo'q")
+    return rates
+
+
+async def _from_fallback() -> dict:
+    """Zaxira manba: bozor kursi (CBU dan biroz farq qilishi mumkin), kunlik o'zgarishsiz."""
+    data = await _fetch_json(FALLBACK_URL)
+    per_uzs = data["rates"]
+    date = time.strftime("%d.%m.%Y", time.gmtime(data["time_last_update_unix"]))
+    return {c: {"rate": 1 / per_uzs[c], "diff": None, "nominal": 1, "date": date, "src": "alt"}
+            for c in CURRENCIES if per_uzs.get(c)}
+
+
 async def get_rates() -> dict | None:
-    """{"USD": {"rate": 11861.96, "diff": 23.04, "nominal": 1, "date": "27.10.2026"}, ...}"""
+    """{"USD": {"rate": 11861.96, "diff": 23.04, "nominal": 1, "date": "27.10.2026", "src": "cbu"}, ...}"""
     if _cache["rates"] and time.time() - _cache["ts"] < 3600:
         return _cache["rates"]
-    try:
-        async with aiohttp.ClientSession() as s:
-            async with s.get(CBU_URL, timeout=aiohttp.ClientTimeout(total=10)) as r:
-                data = await r.json(content_type=None)
-        rates = {x["Ccy"]: {"rate": float(x["Rate"]), "diff": float(x["Diff"]),
-                            "nominal": int(x["Nominal"]), "date": x["Date"]}
-                 for x in data if x["Ccy"] in CURRENCIES}
-        _cache.update(rates=rates, ts=time.time())
-        return rates
-    except Exception as e:
-        logging.warning("CBU kurslarini olib bo'lmadi: %s", e)
-        return _cache["rates"]
+    for source in (_from_cbu, _from_cbu, _from_fallback):
+        try:
+            rates = await source()
+            _cache.update(rates=rates, ts=time.time())
+            return rates
+        except Exception as e:
+            logging.warning("Kurslarni olib bo'lmadi (%s): %r", source.__name__, e)
+    return _cache["rates"]
 
 
 def fmt(n: float, digits: int = 2) -> str:
@@ -52,12 +79,14 @@ def rates_text(lang: str, rates: dict) -> str:
         if c not in rates:
             continue
         r = rates[c]
-        arrow = "🟢 ▲" if r["diff"] > 0 else "🔴 ▼" if r["diff"] < 0 else "⚪️"
-        nominal = f"{r['nominal']} " if r["nominal"] != 1 else "1 "
-        lines.append(f"{FLAGS[c]} {nominal}{c} = <b>{fmt(r['rate'])}</b> {t['cur_sum']}  "
-                     f"{arrow} {fmt(abs(r['diff']))}")
-    date = next(iter(rates.values()))["date"]
-    return t["cur_title"].format(date=date) + "\n\n" + "\n".join(lines) + "\n\n" + t["cur_source"]
+        line = f"{FLAGS[c]} {r['nominal']} {c} = <b>{fmt(r['rate'])}</b> {t['cur_sum']}"
+        if r["diff"] is not None:
+            arrow = "🟢 ▲" if r["diff"] > 0 else "🔴 ▼" if r["diff"] < 0 else "⚪️"
+            line += f"  {arrow} {fmt(abs(r['diff']))}"
+        lines.append(line)
+    first = next(iter(rates.values()))
+    source = t["cur_source"] if first["src"] == "cbu" else t["cur_source_alt"]
+    return t["cur_title"].format(date=first["date"]) + "\n\n" + "\n".join(lines) + "\n\n" + source
 
 
 # ---------- Klaviaturalar ----------
@@ -143,7 +172,8 @@ def build_router(get_lang, main_kb, cancel_kb) -> Router:
         await state.clear()
         await m.answer(t["cur_result"].format(amount=fmt(amount), ccy=ccy, flag=FLAGS[ccy],
                                               uzs=fmt(uzs, 0), rate=fmt(r["rate"]),
-                                              date=r["date"]),
+                                              date=r["date"],
+                                              src="cbu.uz" if r["src"] == "cbu" else "open.er-api.com"),
                        reply_markup=main_kb(lang))
 
     return router

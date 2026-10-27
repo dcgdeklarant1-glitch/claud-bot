@@ -3,11 +3,9 @@ import asyncio
 import json
 import logging
 import os
-import time
 import datetime as dt
 from pathlib import Path
 
-import aiohttp
 from aiogram import Bot, Dispatcher, F
 from aiogram.client.default import DefaultBotProperties
 from aiogram.filters import CommandStart, Command
@@ -54,22 +52,12 @@ def set_lang(uid: int, lang: str):
 
 
 # ---------- USD kursi (CBU) ----------
-_rate_cache = {"rate": None, "ts": 0}
-
 async def usd_rate() -> float:
-    if _rate_cache["rate"] and time.time() - _rate_cache["ts"] < 3600:
-        return _rate_cache["rate"]
-    try:
-        async with aiohttp.ClientSession() as s:
-            async with s.get("https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/",
-                             timeout=aiohttp.ClientTimeout(total=10)) as r:
-                data = await r.json(content_type=None)
-                rate = float(data[0]["Rate"])
-                _rate_cache.update(rate=rate, ts=time.time())
-                return rate
-    except Exception as e:
-        logging.warning("CBU kursini olib bo'lmadi: %s", e)
-        return _rate_cache["rate"] or R.FALLBACK_USD_RATE
+    """Valyuta xizmati bilan bir xil manba (CBU, zaxira: open.er-api.com)."""
+    rates = await currency.get_rates()
+    if rates and "USD" in rates:
+        return rates["USD"]["rate"]
+    return R.FALLBACK_USD_RATE
 
 
 # ---------- Klaviaturalar ----------
