@@ -18,6 +18,7 @@ from aiogram.types import (Message, CallbackQuery, ReplyKeyboardMarkup, Keyboard
 from dotenv import load_dotenv
 
 import rates as R
+import logistics
 from calculator import calculate
 from texts import T
 
@@ -75,6 +76,7 @@ def main_kb(lang):
     t = T[lang]
     return ReplyKeyboardMarkup(resize_keyboard=True, keyboard=[
         [KeyboardButton(text=t["btn_calc"])],
+        [KeyboardButton(text=t["btn_services"])],
         [KeyboardButton(text=t["btn_info"]), KeyboardButton(text=t["btn_lang"])],
     ])
 
@@ -143,6 +145,13 @@ async def lang_chosen(c: CallbackQuery):
 async def info(m: Message):
     lang = get_lang(m.from_user.id)
     await m.answer(T[lang]["info"].format(brv=fmt(R.BRV), max=R.MAX_AGE_ICE))
+
+@dp.message(Command("xizmatlar"))
+@dp.message(F.text.in_(btn_texts("btn_services")))
+async def services(m: Message, state: FSMContext):
+    lang = get_lang(m.from_user.id)
+    await state.clear()
+    await m.answer(T[lang]["svc_menu"], reply_markup=logistics.services_kb(lang))
 
 @dp.message(F.text.in_(btn_texts("btn_cancel")))
 async def cancel(m: Message, state: FSMContext):
@@ -244,6 +253,9 @@ async def delivery_in(m: Message, state: FSMContext):
         grand=fmt(r.customs_value + r.total_usd),
     )
     await m.answer(text, reply_markup=main_kb(lang))
+
+
+dp.include_router(logistics.build_router(get_lang, main_kb, cancel_kb))
 
 
 async def run_webhook(bot: Bot, base_url: str):
