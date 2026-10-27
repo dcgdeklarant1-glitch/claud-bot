@@ -43,6 +43,7 @@ class Logi(StatesGroup):
 def services_kb(lang):
     return InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text=T[lang]["svc_logistics"], callback_data="svc:logistics")],
+        [InlineKeyboardButton(text=T[lang]["svc_currency"], callback_data="svc:currency")],
     ])
 
 def location_kb(lang):

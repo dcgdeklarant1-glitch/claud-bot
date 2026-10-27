@@ -19,6 +19,7 @@ from dotenv import load_dotenv
 
 import rates as R
 import logistics
+import currency
 from calculator import calculate
 from texts import T
 
@@ -256,6 +257,7 @@ async def delivery_in(m: Message, state: FSMContext):
 
 
 dp.include_router(logistics.build_router(get_lang, main_kb, cancel_kb))
+dp.include_router(currency.build_router(get_lang, main_kb, cancel_kb))
 
 
 async def run_webhook(bot: Bot, base_url: str):
