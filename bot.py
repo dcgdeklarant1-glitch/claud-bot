@@ -1,4 +1,4 @@
-"""Avto Kalkulyator — Telegram bot (rastamojka hisoblash)."""
+"""DCGCargo — Telegram bot."""
 import asyncio
 import json
 import logging
@@ -277,6 +277,12 @@ async def main():
     if not TOKEN:
         raise SystemExit("BOT_TOKEN topilmadi! token.txt fayliga tokeningizni yozing.")
     bot = Bot(TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
+    # /start dan oldin ko'rinadigan bot tavsifi (eski "Avto Kalkulyator" matni o'rniga)
+    try:
+        await bot.set_my_description("Assalomu alaykum! DCG Cargo botiga xush kelibsiz! 🚚")
+        await bot.set_my_short_description("DCG Cargo rasmiy boti 🚚")
+    except Exception as e:
+        print("Bot tavsifini o'rnatib bo'lmadi:", e)
     base_url = os.getenv("WEBHOOK_URL") or os.getenv("RENDER_EXTERNAL_URL")
     if base_url:
         await run_webhook(bot, base_url)
