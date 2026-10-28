@@ -11,8 +11,9 @@ from aiogram.types import Message, CallbackQuery, InlineKeyboardMarkup, InlineKe
 from texts import T
 
 CBU_URL = "https://cbu.uz/uz/arkhiv-kursov-valyut/json/"
-CURRENCIES = ("USD", "EUR", "RUB", "CNY", "KRW", "KZT")
-FLAGS = {"USD": "🇺🇸", "EUR": "🇪🇺", "RUB": "🇷🇺", "CNY": "🇨🇳", "KRW": "🇰🇷", "KZT": "🇰🇿"}
+CURRENCIES = ("USD", "EUR", "CNY", "RUB", "TRY", "KZT", "KGS", "KRW")
+FLAGS = {"USD": "🇺🇸", "EUR": "🇪🇺", "CNY": "🇨🇳", "RUB": "🇷🇺", "TRY": "🇹🇷",
+         "KZT": "🇰🇿", "KGS": "🇰🇬", "KRW": "🇰🇷"}
 
 
 class Conv(StatesGroup):
@@ -104,7 +105,8 @@ def pick_kb(lang):
     return InlineKeyboardMarkup(inline_keyboard=rows)
 
 
-def build_router(get_lang, main_kb, cancel_kb) -> Router:
+def build_router(get_lang, main_kb, cancel_kb):
+    """(router, start) qaytaradi: start — asosiy menyudagi «Valyuta kursi» tugmasi uchun."""
     router = Router(name="currency")
 
     async def send_rates(m: Message, lang: str, edit: bool = False):
@@ -119,15 +121,9 @@ def build_router(get_lang, main_kb, cancel_kb) -> Router:
                 return  # matn o'zgarmagan bo'lsa Telegram xato beradi
         await m.answer(text, reply_markup=rates_kb(lang))
 
-    # ----- Xizmatlar menyusidan yoki /kurs buyrug'i -----
-    @router.callback_query(F.data == "svc:currency")
-    async def currency_start(c: CallbackQuery, state: FSMContext):
-        await state.clear()
-        await send_rates(c.message, get_lang(c.from_user.id))
-        await c.answer()
-
+    # ----- Asosiy menyudan yoki /kurs buyrug'i -----
     @router.message(F.text.in_({"/kurs", "/rates"}))
-    async def currency_cmd(m: Message, state: FSMContext):
+    async def currency_start(m: Message, state: FSMContext):
         await state.clear()
         await send_rates(m, get_lang(m.from_user.id))
 
@@ -176,4 +172,4 @@ def build_router(get_lang, main_kb, cancel_kb) -> Router:
                                               src="cbu.uz" if r["src"] == "cbu" else "open.er-api.com"),
                        reply_markup=main_kb(lang))
 
-    return router
+    return router, currency_start

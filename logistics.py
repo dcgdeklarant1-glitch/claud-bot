@@ -40,12 +40,6 @@ class Logi(StatesGroup):
 
 
 # ---------- Klaviaturalar ----------
-def services_kb(lang):
-    return InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text=T[lang]["svc_logistics"], callback_data="svc:logistics", style="primary")],
-        [InlineKeyboardButton(text=T[lang]["svc_currency"], callback_data="svc:currency", style="success")],
-    ])
-
 def location_kb(lang):
     t = T[lang]
     return ReplyKeyboardMarkup(resize_keyboard=True, keyboard=[
@@ -120,7 +114,8 @@ def save_order(record: dict):
         fh.write(json.dumps(record, ensure_ascii=False) + "\n")
 
 
-def build_router(get_lang, main_kb, cancel_kb) -> Router:
+def build_router(get_lang, main_kb, cancel_kb):
+    """(router, start) qaytaradi: start — asosiy menyudagi «Logistika» tugmasi uchun."""
     router = Router(name="logistics")
 
     async def ask(m: Message, state: FSMContext, field: str):
@@ -155,14 +150,12 @@ def build_router(get_lang, main_kb, cancel_kb) -> Router:
             return await show_confirm(m, state)
         await ask(m, state, FIELDS[FIELDS.index(field) + 1])
 
-    # ----- Xizmatlar menyusidan logistika tanlandi -----
-    @router.callback_query(F.data == "svc:logistics")
-    async def logistics_start(c: CallbackQuery, state: FSMContext):
-        lang = get_lang(c.from_user.id)
+    # ----- Asosiy menyudan logistika tanlandi -----
+    async def logistics_start(m: Message, state: FSMContext):
+        lang = get_lang(m.from_user.id)
         await state.clear()
-        await c.message.edit_text(T[lang]["lg_intro"])
-        await ask(c.message, state, "origin")
-        await c.answer()
+        await m.answer(T[lang]["lg_intro"])
+        await ask(m, state, "origin")
 
     # ----- Qayerdan / qayerga -----
     async def place_in(m: Message, state: FSMContext, field: str):
@@ -299,4 +292,4 @@ def build_router(get_lang, main_kb, cancel_kb) -> Router:
     async def confirm_use_buttons(m: Message):
         await m.answer(T[get_lang(m.from_user.id)]["lg_use_buttons"])
 
-    return router
+    return router, logistics_start

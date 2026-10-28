@@ -70,7 +70,8 @@ def main_kb(lang):
     t = T[lang]
     return ReplyKeyboardMarkup(resize_keyboard=True, keyboard=[
         [KeyboardButton(text=t["btn_calc"], style="primary")],
-        [KeyboardButton(text=t["btn_services"], style="success")],
+        [KeyboardButton(text=t["btn_logistics"], style="success"),
+         KeyboardButton(text=t["btn_currency"], style="success")],
         [KeyboardButton(text=t["btn_support"])],
         [KeyboardButton(text=t["btn_info"]), KeyboardButton(text=t["btn_lang"])],
     ])
@@ -89,10 +90,12 @@ def cancel_kb(lang, skip=False):
     return ReplyKeyboardMarkup(resize_keyboard=True, keyboard=rows)
 
 def lang_kb():
-    return InlineKeyboardMarkup(inline_keyboard=[[
-        InlineKeyboardButton(text="🇺🇿 O'zbekcha", callback_data="lang:uz", style="success"),
-        InlineKeyboardButton(text="🇷🇺 Русский", callback_data="lang:ru", style="primary"),
-    ]])
+    return InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text="🇺🇿 O'zbekcha", callback_data="lang:uz", style="success"),
+         InlineKeyboardButton(text="🇷🇺 Русский", callback_data="lang:ru", style="primary")],
+        [InlineKeyboardButton(text="🇬🇧 English", callback_data="lang:en", style="primary"),
+         InlineKeyboardButton(text="🇨🇳 中文", callback_data="lang:zh", style="success")],
+    ])
 
 def fuel_kb(lang):
     t = T[lang]
@@ -119,6 +122,11 @@ def btn_texts(key):
     return {T[l][key] for l in T}
 
 
+# Logistika va valyuta kursi alohida modullarda; ularni asosiy menyu tugmalari ochadi
+logistics_router, logistics_start = logistics.build_router(get_lang, main_kb, cancel_kb)
+currency_router, currency_start = currency.build_router(get_lang, main_kb, cancel_kb)
+
+
 # ---------- Handlerlar ----------
 @dp.message(CommandStart())
 async def start(m: Message, state: FSMContext):
@@ -138,6 +146,8 @@ async def change_lang(m: Message, state: FSMContext):
 @dp.callback_query(F.data.startswith("lang:"))
 async def lang_chosen(c: CallbackQuery):
     lang = c.data.split(":")[1]
+    if lang not in T:
+        return await c.answer()
     set_lang(c.from_user.id, lang)
     await c.message.delete()
     await c.message.answer(T[lang]["welcome"], reply_markup=main_kb(lang))
@@ -157,12 +167,14 @@ async def support(m: Message, state: FSMContext):
     await m.answer(T[lang]["support"].format(admins=admins, phone=SUPPORT_PHONE),
                    reply_markup=support_kb(lang))
 
-@dp.message(Command("xizmatlar"))
-@dp.message(F.text.in_(btn_texts("btn_services")))
-async def services(m: Message, state: FSMContext):
-    lang = get_lang(m.from_user.id)
-    await state.clear()
-    await m.answer(T[lang]["svc_menu"], reply_markup=logistics.services_kb(lang))
+@dp.message(Command("logistika"))
+@dp.message(F.text.in_(btn_texts("btn_logistics")))
+async def logistics_menu(m: Message, state: FSMContext):
+    await logistics_start(m, state)
+
+@dp.message(F.text.in_(btn_texts("btn_currency")))
+async def currency_menu(m: Message, state: FSMContext):
+    await currency_start(m, state)
 
 @dp.message(F.text.in_(btn_texts("btn_cancel")))
 async def cancel(m: Message, state: FSMContext):
@@ -266,8 +278,8 @@ async def delivery_in(m: Message, state: FSMContext):
     await m.answer(text, reply_markup=main_kb(lang))
 
 
-dp.include_router(logistics.build_router(get_lang, main_kb, cancel_kb))
-dp.include_router(currency.build_router(get_lang, main_kb, cancel_kb))
+dp.include_router(logistics_router)
+dp.include_router(currency_router)
 
 
 async def run_webhook(bot: Bot, base_url: str):
@@ -300,11 +312,13 @@ async def main():
         raise SystemExit("BOT_TOKEN topilmadi! token.txt fayliga tokeningizni yozing.")
     bot = Bot(TOKEN, default=DefaultBotProperties(parse_mode="HTML"))
     # /start dan oldin ko'rinadigan bot tavsifi (eski "Avto Kalkulyator" matni o'rniga)
-    try:
-        await bot.set_my_description("Assalomu alaykum! DCG Cargo botiga xush kelibsiz! 🚚")
-        await bot.set_my_short_description("DCG Cargo rasmiy boti 🚚")
-    except Exception as e:
-        print("Bot tavsifini o'rnatib bo'lmadi:", e)
+    # Telegram ilovasi tiliga qarab ko'rsatiladi; boshqa tillarda — o'zbekcha (standart)
+    for code, lang in ((None, "uz"), ("ru", "ru"), ("en", "en"), ("zh", "zh")):
+        try:
+            await bot.set_my_description(T[lang]["bot_description"], language_code=code)
+            await bot.set_my_short_description(T[lang]["bot_short_description"], language_code=code)
+        except Exception as e:
+            print(f"Bot tavsifini o'rnatib bo'lmadi ({lang}):", e)
     base_url = os.getenv("WEBHOOK_URL") or os.getenv("RENDER_EXTERNAL_URL")
     if base_url:
         await run_webhook(bot, base_url)
