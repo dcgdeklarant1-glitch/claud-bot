@@ -1,0 +1,37 @@
+# cbu.uz Render serverlariga javob bermaydi (TimeoutError), shuning uchun
+# GitHub har 30 daqiqada CBU kurslarini olib, "rates" branchiga saqlaydi.
+# Bot kursni shu yerdan o'qiydi: raw.githubusercontent.com/<repo>/rates/cbu.json
+name: CBU rates
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/cbu-rates.yml]
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: CBU kurslarini yuklab olish
+        run: |
+          curl -fsS --retry 3 --retry-delay 10 -m 30 -A "Mozilla/5.0" \
+            https://cbu.uz/uz/arkhiv-kursov-valyut/json/ -o cbu.json
+          python3 -c "import json; d = json.load(open('cbu.json')); assert any(x['Ccy'] == 'USD' for x in d); print(len(d), 'ta valyuta')"
+
+      - name: rates branchiga saqlash
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir out && mv cbu.json out/ && cd out
+          git init -q -b rates
+          git add cbu.json
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -qm "CBU rates $(date -u +%F' '%H:%M)"
+          git push -qf "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" rates
