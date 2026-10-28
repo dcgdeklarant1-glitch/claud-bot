@@ -56,6 +56,14 @@ T = {
         ),
         # ---------- Xizmatlar / logistika ----------
         "btn_services": "🛎 Xizmatlar",
+        "btn_support": "🆘 Qo'llab-quvvatlash",
+        "support": (
+            "🆘 <b>Qo'llab-quvvatlash</b>\n\n"
+            "Savollaringiz bo'lsa, administratorga murojaat qiling:\n\n"
+            "{admins}\n"
+            "📞 Telefon: {phone}"
+        ),
+        "support_btn_write": "✍️ Yozish:",
         "svc_menu": "🛎 <b>Xizmatlar</b>\n\nKerakli xizmatni tanlang 👇",
         "svc_logistics": "🚚 Logistika (yuk tashish)",
         "svc_currency": "💱 Valyuta kursi",
@@ -193,6 +201,14 @@ T = {
         ),
         # ---------- Услуги / логистика ----------
         "btn_services": "🛎 Услуги",
+        "btn_support": "🆘 Поддержка",
+        "support": (
+            "🆘 <b>Поддержка</b>\n\n"
+            "Если у вас есть вопросы, свяжитесь с администратором:\n\n"
+            "{admins}\n"
+            "📞 Телефон: {phone}"
+        ),
+        "support_btn_write": "✍️ Написать:",
         "svc_menu": "🛎 <b>Услуги</b>\n\nВыберите нужную услугу 👇",
         "svc_logistics": "🚚 Логистика (грузоперевозки)",
         "svc_currency": "💱 Курс валют",

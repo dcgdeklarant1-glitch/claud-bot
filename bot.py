@@ -30,6 +30,11 @@ if TOKEN and ":" not in TOKEN:
     TOKEN = None
 USERS_FILE = Path(__file__).with_name("users.json")
 
+# Qo'llab-quvvatlash: admin akkaunti va telefoni (Render'da env orqali ham o'zgartirsa bo'ladi)
+SUPPORT_USERNAMES = [u.strip().lstrip("@") for u in
+                     os.getenv("SUPPORT_USERNAMES", "Dcgadmin2229,DCG_manager").split(",") if u.strip()]
+SUPPORT_PHONE = os.getenv("SUPPORT_PHONE", "+998 55 500 11 13")
+
 logging.basicConfig(level=logging.INFO)
 dp = Dispatcher()
 
@@ -66,7 +71,15 @@ def main_kb(lang):
     return ReplyKeyboardMarkup(resize_keyboard=True, keyboard=[
         [KeyboardButton(text=t["btn_calc"], style="primary")],
         [KeyboardButton(text=t["btn_services"], style="success")],
+        [KeyboardButton(text=t["btn_support"])],
         [KeyboardButton(text=t["btn_info"]), KeyboardButton(text=t["btn_lang"])],
+    ])
+
+def support_kb(lang):
+    return InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text=f"{T[lang]['support_btn_write']} @{u}",
+                              url=f"https://t.me/{u}", style="primary")]
+        for u in SUPPORT_USERNAMES
     ])
 
 def cancel_kb(lang, skip=False):
@@ -134,6 +147,15 @@ async def lang_chosen(c: CallbackQuery):
 async def info(m: Message):
     lang = get_lang(m.from_user.id)
     await m.answer(T[lang]["info"].format(brv=fmt(R.BRV), max=R.MAX_AGE_ICE))
+
+@dp.message(Command("support"))
+@dp.message(F.text.in_(btn_texts("btn_support")))
+async def support(m: Message, state: FSMContext):
+    lang = get_lang(m.from_user.id)
+    await state.clear()
+    admins = "\n".join(f"👤 @{u}" for u in SUPPORT_USERNAMES)
+    await m.answer(T[lang]["support"].format(admins=admins, phone=SUPPORT_PHONE),
+                   reply_markup=support_kb(lang))
 
 @dp.message(Command("xizmatlar"))
 @dp.message(F.text.in_(btn_texts("btn_services")))
