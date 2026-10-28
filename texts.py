@@ -3,7 +3,7 @@
 T = {
     "uz": {
         "choose_lang": "🌐 Tilni tanlang / Выберите язык:",
-        "welcome": "👋 Assalomu alaykum!\n\n🚗 <b>Avto Kalkulyator</b> — O'zbekistonga avtomobil olib kirishda bojxona to'lovlarini (rastamojka) hisoblab beradi.\n\nQuyidagi tugmani bosing 👇",
+        "welcome": "👋 <b>ASSALOMU ALAYKUM!</b>\n\n🚚 <b>DCGCargo</b> botiga xush kelibsiz!\n\nQuyidagi tugmani bosing 👇",
         "btn_calc": "🚗 Rastamojkani hisoblash",
         "btn_info": "ℹ️ Ma'lumot",
         "btn_lang": "🌐 Tilni o'zgartirish",
