@@ -64,30 +64,30 @@ async def usd_rate() -> float:
 def main_kb(lang):
     t = T[lang]
     return ReplyKeyboardMarkup(resize_keyboard=True, keyboard=[
-        [KeyboardButton(text=t["btn_calc"])],
-        [KeyboardButton(text=t["btn_services"])],
+        [KeyboardButton(text=t["btn_calc"], style="primary")],
+        [KeyboardButton(text=t["btn_services"], style="success")],
         [KeyboardButton(text=t["btn_info"]), KeyboardButton(text=t["btn_lang"])],
     ])
 
 def cancel_kb(lang, skip=False):
     t = T[lang]
-    rows = [[KeyboardButton(text=t["btn_skip"])]] if skip else []
-    rows.append([KeyboardButton(text=t["btn_cancel"])])
+    rows = [[KeyboardButton(text=t["btn_skip"], style="primary")]] if skip else []
+    rows.append([KeyboardButton(text=t["btn_cancel"], style="danger")])
     return ReplyKeyboardMarkup(resize_keyboard=True, keyboard=rows)
 
 def lang_kb():
     return InlineKeyboardMarkup(inline_keyboard=[[
-        InlineKeyboardButton(text="🇺🇿 O'zbekcha", callback_data="lang:uz"),
-        InlineKeyboardButton(text="🇷🇺 Русский", callback_data="lang:ru"),
+        InlineKeyboardButton(text="🇺🇿 O'zbekcha", callback_data="lang:uz", style="success"),
+        InlineKeyboardButton(text="🇷🇺 Русский", callback_data="lang:ru", style="primary"),
     ]])
 
 def fuel_kb(lang):
     t = T[lang]
     return InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text=t["fuel_ice"], callback_data="fuel:ice")],
-        [InlineKeyboardButton(text=t["fuel_hybrid"], callback_data="fuel:hybrid")],
-        [InlineKeyboardButton(text=t["fuel_serial"], callback_data="fuel:serial")],
-        [InlineKeyboardButton(text=t["fuel_ev"], callback_data="fuel:ev")],
+        [InlineKeyboardButton(text=t["fuel_ice"], callback_data="fuel:ice", style="primary")],
+        [InlineKeyboardButton(text=t["fuel_hybrid"], callback_data="fuel:hybrid", style="success")],
+        [InlineKeyboardButton(text=t["fuel_serial"], callback_data="fuel:serial", style="success")],
+        [InlineKeyboardButton(text=t["fuel_ev"], callback_data="fuel:ev", style="primary")],
     ])
 
 

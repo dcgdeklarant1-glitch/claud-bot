@@ -42,22 +42,22 @@ class Logi(StatesGroup):
 # ---------- Klaviaturalar ----------
 def services_kb(lang):
     return InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text=T[lang]["svc_logistics"], callback_data="svc:logistics")],
-        [InlineKeyboardButton(text=T[lang]["svc_currency"], callback_data="svc:currency")],
+        [InlineKeyboardButton(text=T[lang]["svc_logistics"], callback_data="svc:logistics", style="primary")],
+        [InlineKeyboardButton(text=T[lang]["svc_currency"], callback_data="svc:currency", style="success")],
     ])
 
 def location_kb(lang):
     t = T[lang]
     return ReplyKeyboardMarkup(resize_keyboard=True, keyboard=[
-        [KeyboardButton(text=t["lg_btn_location"], request_location=True)],
-        [KeyboardButton(text=t["btn_cancel"])],
+        [KeyboardButton(text=t["lg_btn_location"], request_location=True, style="success")],
+        [KeyboardButton(text=t["btn_cancel"], style="danger")],
     ])
 
 def phone_kb(lang):
     t = T[lang]
     return ReplyKeyboardMarkup(resize_keyboard=True, keyboard=[
-        [KeyboardButton(text=t["lg_btn_phone"], request_contact=True)],
-        [KeyboardButton(text=t["btn_cancel"])],
+        [KeyboardButton(text=t["lg_btn_phone"], request_contact=True, style="success")],
+        [KeyboardButton(text=t["btn_cancel"], style="danger")],
     ])
 
 def options_kb(lang, field, keys, per_row=2):
@@ -69,9 +69,9 @@ def options_kb(lang, field, keys, per_row=2):
 def confirm_kb(lang):
     t = T[lang]
     return InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text=t["lg_btn_confirm"], callback_data="lg:confirm")],
-        [InlineKeyboardButton(text=t["lg_btn_edit"], callback_data="lg:edit"),
-         InlineKeyboardButton(text=t["lg_btn_drop"], callback_data="lg:drop")],
+        [InlineKeyboardButton(text=t["lg_btn_confirm"], callback_data="lg:confirm", style="success")],
+        [InlineKeyboardButton(text=t["lg_btn_edit"], callback_data="lg:edit", style="primary"),
+         InlineKeyboardButton(text=t["lg_btn_drop"], callback_data="lg:drop", style="danger")],
     ])
 
 def edit_kb(lang):
@@ -79,7 +79,7 @@ def edit_kb(lang):
     labels = t["lg_field"]
     buttons = [InlineKeyboardButton(text=labels[f], callback_data=f"lg:edit:{f}") for f in FIELDS]
     rows = [buttons[i:i + 2] for i in range(0, len(buttons), 2)]
-    rows.append([InlineKeyboardButton(text=t["lg_btn_back"], callback_data="lg:back")])
+    rows.append([InlineKeyboardButton(text=t["lg_btn_back"], callback_data="lg:back", style="danger")])
     return InlineKeyboardMarkup(inline_keyboard=rows)
 
 
