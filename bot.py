@@ -319,6 +319,7 @@ async def main():
             await bot.set_my_short_description(T[lang]["bot_short_description"], language_code=code)
         except Exception as e:
             print(f"Bot tavsifini o'rnatib bo'lmadi ({lang}):", e)
+    await currency.load_manual(bot)  # admin /setkurs bilan kiritgan CBU kursi
     base_url = os.getenv("WEBHOOK_URL") or os.getenv("RENDER_EXTERNAL_URL")
     if base_url:
         await run_webhook(bot, base_url)
