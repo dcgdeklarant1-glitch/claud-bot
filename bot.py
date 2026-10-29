@@ -1,8 +1,8 @@
 """DCGCargo — Telegram bot."""
 import asyncio
-import json
 import logging
 import os
+import time
 import datetime as dt
 from pathlib import Path
 
@@ -19,6 +19,8 @@ import rates as R
 import logistics
 import currency
 import certificate
+import admin
+import db
 from calculator import calculate
 from texts import T
 
@@ -29,7 +31,6 @@ if not TOKEN and _tok_file.exists():
     TOKEN = _tok_file.read_text(encoding="utf-8-sig").strip() or None
 if TOKEN and ":" not in TOKEN:
     TOKEN = None
-USERS_FILE = Path(__file__).with_name("users.json")
 
 # Qo'llab-quvvatlash: admin akkaunti va telefoni (Render'da env orqali ham o'zgartirsa bo'ladi)
 SUPPORT_USERNAMES = [u.strip().lstrip("@") for u in
@@ -41,20 +42,34 @@ dp = Dispatcher()
 
 
 # ---------- Foydalanuvchi tili ----------
-def _load_users() -> dict:
-    try:
-        return json.loads(USERS_FILE.read_text(encoding="utf-8"))
-    except Exception:
-        return {}
-
-USERS = _load_users()
+# Tillar bazada saqlanadi; tez o'qish uchun xotirada ham turadi (bot ishga tushganda yuklanadi)
+USERS: dict = {}
 
 def get_lang(uid: int) -> str:
     return USERS.get(str(uid), "uz")
 
-def set_lang(uid: int, lang: str):
-    USERS[str(uid)] = lang
-    USERS_FILE.write_text(json.dumps(USERS), encoding="utf-8")
+async def set_lang(user, lang: str):
+    USERS[str(user.id)] = lang
+    await db.set_lang(user, lang)
+
+
+# ---------- Mijozlar bazasi: har bir foydalanuvchi faolligini yozib boradi ----------
+_last_touch: dict = {}
+
+async def track_user(handler, event, data):
+    user = data.get("event_from_user")
+    if user and not user.is_bot:
+        t = time.monotonic()
+        if t - _last_touch.get(user.id, -1e9) > 600:  # bazaga ko'pi bilan 10 daqiqada bir marta
+            _last_touch[user.id] = t
+            try:
+                await db.touch_user(user)
+            except Exception as e:
+                logging.error("Mijozni bazaga yozib bo'lmadi (%s): %r", user.id, e)
+    return await handler(event, data)
+
+dp.message.outer_middleware(track_user)
+dp.callback_query.outer_middleware(track_user)
 
 
 # ---------- USD kursi (CBU) ----------
@@ -151,7 +166,7 @@ async def lang_chosen(c: CallbackQuery):
     lang = c.data.split(":")[1]
     if lang not in T:
         return await c.answer()
-    set_lang(c.from_user.id, lang)
+    await set_lang(c.from_user, lang)
     await c.message.delete()
     await c.message.answer(T[lang]["welcome"], reply_markup=main_kb(lang))
     await c.answer()
@@ -283,11 +298,17 @@ async def delivery_in(m: Message, state: FSMContext):
         grand=fmt(r.customs_value + r.total_usd),
     )
     await m.answer(text, reply_markup=main_kb(lang))
+    try:
+        await db.add_calc(m.from_user, d["fuel"], d["year"], d["cc"], d["price"], delivery,
+                          r.total_uzs, r.total_usd)
+    except Exception as e:
+        logging.error("Hisob-kitobni bazaga yozib bo'lmadi: %r", e)
 
 
 dp.include_router(logistics_router)
 dp.include_router(currency_router)
 dp.include_router(cert_router)
+dp.include_router(admin.build_router())
 
 
 async def run_webhook(bot: Bot, base_url: str):
@@ -327,6 +348,9 @@ async def main():
             await bot.set_my_short_description(T[lang]["bot_short_description"], language_code=code)
         except Exception as e:
             print(f"Bot tavsifini o'rnatib bo'lmadi ({lang}):", e)
+    await db.init()
+    USERS.update(await db.user_langs())
+    await admin.set_admin_commands(bot)
     await currency.load_manual(bot)  # admin /setkurs bilan kiritgan CBU kursi
     base_url = os.getenv("WEBHOOK_URL") or os.getenv("RENDER_EXTERNAL_URL")
     if base_url:

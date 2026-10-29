@@ -1,11 +1,8 @@
 """Logistika xizmati: yuk tashishga buyurtma (bosqichma-bosqich, tugmali forma)."""
-import datetime as dt
-import json
 import logging
 import os
 import re
 from html import escape
-from pathlib import Path
 
 from aiogram import Bot, F, Router
 from aiogram.filters import StateFilter
@@ -14,9 +11,9 @@ from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import (Message, CallbackQuery, ReplyKeyboardMarkup, KeyboardButton,
                            InlineKeyboardMarkup, InlineKeyboardButton)
 
+import db
 from texts import T
 
-ORDERS_FILE = Path(__file__).with_name("orders.jsonl")
 PHONE_RE = re.compile(r"^\+?\d[\d\s\-()]{6,18}\d$")
 
 CARGO = ("furniture", "food", "building", "appliances", "textile", "other")
@@ -101,17 +98,6 @@ def summary(lang, d: dict) -> str:
 def admin_ids() -> list:
     """Buyurtmalar shu Telegram ID larga yuboriladi (vergul bilan bir nechta: ADMIN_ID=111,222)."""
     return [int(x) for x in re.split(r"[,\s]+", os.getenv("ADMIN_ID", "")) if x.isdigit()]
-
-def next_order_no() -> int:
-    try:
-        with ORDERS_FILE.open(encoding="utf-8") as fh:
-            return sum(1 for _ in fh) + 1
-    except FileNotFoundError:
-        return 1
-
-def save_order(record: dict):
-    with ORDERS_FILE.open("a", encoding="utf-8") as fh:
-        fh.write(json.dumps(record, ensure_ascii=False) + "\n")
 
 
 def build_router(get_lang, main_kb, cancel_kb):
@@ -266,12 +252,9 @@ def build_router(get_lang, main_kb, cancel_kb):
         await c.message.edit_reply_markup(reply_markup=None)
         await c.answer()
 
-        no = next_order_no()
         user = c.from_user
-        save_order({"no": no, "time": dt.datetime.now().isoformat(timespec="seconds"),
-                    "user_id": user.id, "username": user.username, "name": user.full_name,
-                    "lang": lang, **{f: d[f] for f in FIELDS},
-                    "cargo_text": d.get("cargo_text"), "ready_text": d.get("ready_text")})
+        no = await db.add_order(user, {"lang": lang, **{f: d[f] for f in FIELDS},
+                                       "cargo_text": d.get("cargo_text"), "ready_text": d.get("ready_text")})
 
         await c.message.answer(T[lang]["lg_thanks"].format(no=no), reply_markup=main_kb(lang))
 
@@ -281,7 +264,7 @@ def build_router(get_lang, main_kb, cancel_kb):
         text = T["uz"]["lg_admin"].format(no=no, who=who, summary=summary("uz", d))
         admins = admin_ids()
         if not admins:
-            logging.warning("ADMIN_ID o'rnatilmagan: #%s buyurtma faqat orders.jsonl ga yozildi", no)
+            logging.warning("ADMIN_ID o'rnatilmagan: #%s buyurtma faqat bazaga yozildi", no)
         for admin in admins:
             try:
                 await bot.send_message(admin, text, disable_web_page_preview=True)

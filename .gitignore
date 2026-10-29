@@ -4,3 +4,4 @@ users.json
 orders.jsonl
 __pycache__/
 certificates.jsonl
+bot.db

@@ -1,19 +1,16 @@
 """Sertifikat kerakligini aniqlash: mijoz tovar ma'lumotlarini yuboradi, mutaxassis javob beradi."""
-import datetime as dt
-import json
 import logging
 from html import escape
-from pathlib import Path
 
 from aiogram import Bot, F, Router
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import Message, CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
 
+import db
 from logistics import admin_ids, phone_kb, PHONE_RE
 from texts import T
 
-REQUESTS_FILE = Path(__file__).with_name("certificates.jsonl")
 PURPOSE = ("sale", "personal")
 FIELDS = ("product", "code", "country", "purpose", "file", "phone")
 
@@ -66,17 +63,6 @@ def value_text(lang, d: dict, field: str) -> str:
 def summary(lang, d: dict) -> str:
     labels = T[lang]["ct_field"]
     return "\n".join(f"<b>{labels[f]}:</b> {value_text(lang, d, f)}" for f in FIELDS)
-
-def next_request_no() -> int:
-    try:
-        with REQUESTS_FILE.open(encoding="utf-8") as fh:
-            return sum(1 for _ in fh) + 1
-    except FileNotFoundError:
-        return 1
-
-def save_request(record: dict):
-    with REQUESTS_FILE.open("a", encoding="utf-8") as fh:
-        fh.write(json.dumps(record, ensure_ascii=False) + "\n")
 
 
 def build_router(get_lang, main_kb, cancel_kb):
@@ -189,11 +175,8 @@ def build_router(get_lang, main_kb, cancel_kb):
         await c.message.edit_reply_markup(reply_markup=None)
         await c.answer()
 
-        no = next_request_no()
         user = c.from_user
-        save_request({"no": no, "time": dt.datetime.now().isoformat(timespec="seconds"),
-                      "user_id": user.id, "username": user.username, "name": user.full_name,
-                      "lang": lang, **{f: d.get(f) for f in FIELDS}})
+        no = await db.add_cert(user, {"lang": lang, **{f: d.get(f) for f in FIELDS}})
 
         await c.message.answer(T[lang]["ct_thanks"].format(no=no), reply_markup=main_kb(lang))
 
@@ -203,7 +186,7 @@ def build_router(get_lang, main_kb, cancel_kb):
         text = T["uz"]["ct_admin"].format(no=no, who=who, summary=summary("uz", d))
         admins = admin_ids()
         if not admins:
-            logging.warning("ADMIN_ID o'rnatilmagan: sertifikat arizasi #%s faqat faylga yozildi", no)
+            logging.warning("ADMIN_ID o'rnatilmagan: sertifikat arizasi #%s faqat bazaga yozildi", no)
         for admin in admins:
             try:
                 f = d.get("file")
@@ -248,6 +231,7 @@ def build_router(get_lang, main_kb, cancel_kb):
             logging.error("Sertifikat javobi #%s mijozga (%s) yuborilmadi: %s", no, user_id, e)
             return await m.answer(T["uz"]["ct_reply_fail"].format(no=no),
                                   reply_markup=main_kb(get_lang(m.from_user.id)))
+        await db.answer_cert(no, m.text or m.caption or "📎 (rasm / fayl)")
         await m.answer(T["uz"]["ct_reply_sent"].format(no=no),
                        reply_markup=main_kb(get_lang(m.from_user.id)))
 
