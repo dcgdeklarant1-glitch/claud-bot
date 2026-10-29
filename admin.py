@@ -13,12 +13,14 @@ from aiogram.types import (Message, CallbackQuery, InlineKeyboardMarkup, InlineK
 import certificate
 import db
 import logistics
+import trade
 from logistics import admin_ids
 from texts import T
 
 PAGE = 10
 CATALOGS = {
     "users": "👥 Mijozlar",
+    "trades": "🌐 Import / eksport zakazlari",
     "orders": "🚚 Logistika buyurtmalari",
     "certs": "📋 Sertifikat arizalari",
     "calcs": "🧮 Rastamojka hisob-kitoblari",
@@ -89,6 +91,8 @@ async def stats_text() -> str:
     users = await q("SELECT COUNT(*) FROM users")
     users_new = await q("SELECT COUNT(*) FROM users WHERE first_seen >= $1", today)
     users_active = await q("SELECT COUNT(*) FROM users WHERE last_seen >= $1", week_ago)
+    trades = await q("SELECT COUNT(*) FROM trades")
+    trades_new = await q("SELECT COUNT(*) FROM trades WHERE created >= $1", today)
     orders = await q("SELECT COUNT(*) FROM orders")
     orders_new = await q("SELECT COUNT(*) FROM orders WHERE created >= $1", today)
     certs = await q("SELECT COUNT(*) FROM certs")
@@ -98,6 +102,7 @@ async def stats_text() -> str:
     return (
         "🛠 <b>Admin panel</b>\n\n"
         f"👥 Mijozlar: <b>{users}</b> (bugun yangi: {users_new}, 7 kunda faol: {users_active})\n"
+        f"🌐 Import / eksport zakazlari: <b>{trades}</b> (bugun: {trades_new})\n"
         f"🚚 Logistika buyurtmalari: <b>{orders}</b> (bugun: {orders_new})\n"
         f"📋 Sertifikat arizalari: <b>{certs}</b> (⏳ javob kutmoqda: {certs_wait})\n"
         f"🧮 Hisob-kitoblar: <b>{calcs}</b> (bugun: {calcs_new})\n\n"
@@ -114,6 +119,14 @@ async def list_text(cat: str, page: int) -> tuple[str, int]:
         lines = [f"{LANG_FLAG.get(r['lang'], '🌐')} {who(r)}"
                  f"{' · 📱 ' + escape(r['phone']) if r['phone'] else ''}\n"
                  f"    🕒 {short_time(r['last_seen'])} · /m{r['id']}" for r in rows]
+    elif cat == "trades":
+        total = await db.fetchval("SELECT COUNT(*) FROM trades")
+        rows = await db.fetch(
+            "SELECT t.*, u.name, u.username FROM trades t LEFT JOIN users u ON u.id = t.user_id "
+            "ORDER BY t.no DESC LIMIT $1 OFFSET $2", PAGE, off)
+        lines = [f"<b>#{r['no']}</b> · {short_time(r['created'])} · {who(r)}\n"
+                 f"    {T['uz']['tr_direction'].get(r['direction'], '')} · 📦 {escape((r['product'] or '')[:30])}"
+                 f" · 📱 {escape(r['phone'])} · /z{r['no']}" for r in rows]
     elif cat == "orders":
         total = await db.fetchval("SELECT COUNT(*) FROM orders")
         rows = await db.fetch(
@@ -152,6 +165,7 @@ async def user_card(uid: int) -> str | None:
     if not rows:
         return None
     u = rows[0]
+    trades = await db.fetch("SELECT no, created FROM trades WHERE user_id = $1 ORDER BY no DESC", uid)
     orders = await db.fetch("SELECT no, created FROM orders WHERE user_id = $1 ORDER BY no DESC", uid)
     certs = await db.fetch("SELECT no, created, answer FROM certs WHERE user_id = $1 ORDER BY no DESC", uid)
     calcs = await db.fetchval("SELECT COUNT(*) FROM calcs WHERE user_id = $1", uid)
@@ -162,7 +176,9 @@ async def user_card(uid: int) -> str | None:
             f"🌐 Til: {LANG_FLAG.get(u['lang'], '')} {u['lang'] or '—'}\n"
             f"🆕 Birinchi kirgan: {short_time(u['first_seen'])}\n"
             f"🕒 Oxirgi faollik: {short_time(u['last_seen'])}\n\n"
-            f"🚚 Logistika buyurtmalari: {len(orders)}\n")
+            f"🌐 Import / eksport zakazlari: {len(trades)}\n")
+    text += "".join(f"    #{z['no']} · {short_time(z['created'])} · /z{z['no']}\n" for z in trades[:5])
+    text += f"🚚 Logistika buyurtmalari: {len(orders)}\n"
     text += "".join(f"    #{o['no']} · {short_time(o['created'])} · /b{o['no']}\n" for o in orders[:5])
     text += f"📋 Sertifikat arizalari: {len(certs)}\n"
     text += "".join(f"    {'✅' if c['answer'] else '⏳'} #{c['no']} · {short_time(c['created'])} · /s{c['no']}\n"
@@ -185,6 +201,16 @@ async def build_xlsx() -> bytes:
                    [[u["id"], u["name"], u["username"], u["phone"], u["lang"], full_time(u["first_seen"]),
                      full_time(u["last_seen"])]
                     for u in users]))
+
+    rows = []
+    for r in await db.fetch("SELECT t.*, u.name FROM trades t LEFT JOIN users u ON u.id = t.user_id ORDER BY t.no"):
+        d = json.loads(r["data"])
+        rows.append([r["no"], full_time(r["created"]), r["user_id"], r["name"], r["phone"],
+                     T["uz"]["tr_direction"].get(d.get("direction"), ""), d.get("product"),
+                     d.get("country"), d.get("volume"), d.get("name")])
+    sheets.append(("Import-eksport",
+                   ["№", "Sana", "Mijoz ID", "Ism (Telegram)", "Telefon", "Xizmat", "Tovar", "Davlat",
+                    "Hajmi", "Ism / kompaniya"], rows))
 
     rows = []
     for r in await db.fetch("SELECT o.*, u.name FROM orders o LEFT JOIN users u ON u.id = o.user_id ORDER BY o.no"):
@@ -236,7 +262,8 @@ async def set_admin_commands(bot: Bot):
     """Adminlarning buyruqlar menyusida /admin ko'rinadi (boshqalarda ko'rinmaydi)."""
     commands = [BotCommand(command="start", description="Bosh menyu"),
                 BotCommand(command="admin", description="🛠 Admin panel: mijozlar bazasi"),
-                BotCommand(command="setkurs", description="💱 CBU kursini kiritish")]
+                BotCommand(command="setkurs", description="💱 CBU kursini kiritish"),
+                BotCommand(command="setlogo", description="🖼 Bot rasmini logotipga almashtirish")]
     for admin in admin_ids():
         try:
             await bot.set_my_commands(commands, scope=BotCommandScopeChat(chat_id=admin))
@@ -261,7 +288,7 @@ def build_router() -> Router:
         except Exception:
             pass  # "message is not modified" — ma'lumot o'zgarmagan
 
-    @router.callback_query(F.data.regexp(r"^adm:list:(users|orders|certs|calcs):\d+$"), is_admin)
+    @router.callback_query(F.data.regexp(r"^adm:list:(users|trades|orders|certs|calcs):\d+$"), is_admin)
     async def show_list(c: CallbackQuery):
         _, _, cat, page = c.data.split(":")
         text, total = await list_text(cat, int(page))
@@ -298,6 +325,18 @@ def build_router() -> Router:
                        f"👤 Mijoz: {who(r)} · /m{r['user_id']}\n\n"
                        f"{logistics.summary('uz', json.loads(r['data']))}",
                        disable_web_page_preview=True)
+
+    @router.message(F.text.regexp(r"^/z(\d+)$"), is_admin)
+    async def show_trade(m: Message):
+        no = int(m.text[2:])
+        rows = await db.fetch("SELECT t.*, u.name, u.username FROM trades t "
+                              "LEFT JOIN users u ON u.id = t.user_id WHERE t.no = $1", no)
+        if not rows:
+            return await m.answer("❗️ Bunday zakaz topilmadi.")
+        r = rows[0]
+        await m.answer(f"🌐 <b>Import / eksport zakazi #{no}</b> · {short_time(r['created'])}\n\n"
+                       f"👤 Mijoz: {who(r)} · /m{r['user_id']}\n\n"
+                       f"{trade.summary('uz', json.loads(r['data']))}")
 
     @router.message(F.text.regexp(r"^/s(\d+)$"), is_admin)
     async def show_cert(m: Message):

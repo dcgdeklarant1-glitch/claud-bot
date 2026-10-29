@@ -12,13 +12,14 @@ from aiogram.filters import CommandStart, Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import (Message, CallbackQuery, ReplyKeyboardMarkup, KeyboardButton,
-                           InlineKeyboardMarkup, InlineKeyboardButton)
+                           InlineKeyboardMarkup, InlineKeyboardButton, FSInputFile)
 from dotenv import load_dotenv
 
 import rates as R
 import logistics
 import currency
 import certificate
+import trade
 import admin
 import db
 from calculator import calculate
@@ -85,6 +86,7 @@ async def usd_rate() -> float:
 def main_kb(lang):
     t = T[lang]
     return ReplyKeyboardMarkup(resize_keyboard=True, keyboard=[
+        [KeyboardButton(text=t["btn_trade"], style="success")],
         [KeyboardButton(text=t["btn_calc"], style="primary")],
         [KeyboardButton(text=t["btn_cert"], style="primary")],
         [KeyboardButton(text=t["btn_logistics"], style="success"),
@@ -143,6 +145,24 @@ def btn_texts(key):
 logistics_router, logistics_start = logistics.build_router(get_lang, main_kb, cancel_kb)
 currency_router, currency_start = currency.build_router(get_lang, main_kb, cancel_kb)
 cert_router, cert_start = certificate.build_router(get_lang, main_kb, cancel_kb)
+trade_router, trade_start = trade.build_router(get_lang, main_kb, cancel_kb)
+
+
+# ---------- Logotip: salomlashuv xabari logotip bilan chiqadi ----------
+LOGO_FILE = Path(__file__).with_name("logo.jpg")
+_logo_id = None  # birinchi yuborilgandan keyin Telegram file_id qayta ishlatiladi
+
+async def send_welcome(m: Message, lang: str):
+    global _logo_id
+    if LOGO_FILE.exists():
+        try:
+            sent = await m.answer_photo(_logo_id or FSInputFile(LOGO_FILE),
+                                        caption=T[lang]["welcome"], reply_markup=main_kb(lang))
+            _logo_id = sent.photo[-1].file_id
+            return
+        except Exception as e:
+            logging.error("Logotipni yuborib bo'lmadi: %r", e)
+    await m.answer(T[lang]["welcome"], reply_markup=main_kb(lang))
 
 
 # ---------- Handlerlar ----------
@@ -152,8 +172,7 @@ async def start(m: Message, state: FSMContext):
     if str(m.from_user.id) not in USERS:
         await m.answer(T["uz"]["choose_lang"], reply_markup=lang_kb())
     else:
-        lang = get_lang(m.from_user.id)
-        await m.answer(T[lang]["welcome"], reply_markup=main_kb(lang))
+        await send_welcome(m, get_lang(m.from_user.id))
 
 @dp.message(Command("lang"))
 @dp.message(F.text.in_(btn_texts("btn_lang")))
@@ -168,7 +187,7 @@ async def lang_chosen(c: CallbackQuery):
         return await c.answer()
     await set_lang(c.from_user, lang)
     await c.message.delete()
-    await c.message.answer(T[lang]["welcome"], reply_markup=main_kb(lang))
+    await send_welcome(c.message, lang)
     await c.answer()
 
 @dp.message(F.text.in_(btn_texts("btn_info")))
@@ -197,6 +216,24 @@ async def currency_menu(m: Message, state: FSMContext):
 @dp.message(F.text.in_(btn_texts("btn_cert")))
 async def cert_menu(m: Message, state: FSMContext):
     await cert_start(m, state)
+
+@dp.message(Command("zakaz"))
+@dp.message(F.text.in_(btn_texts("btn_trade")))
+async def trade_menu(m: Message, state: FSMContext):
+    await trade_start(m, state)
+
+@dp.message(Command("setlogo"))
+async def set_logo(m: Message):
+    """Admin: botning profil rasmini logo.jpg ga almashtiradi."""
+    if not admin.is_admin(m):
+        return
+    from aiogram.types import InputProfilePhotoStatic
+    try:
+        await m.bot.set_my_profile_photo(photo=InputProfilePhotoStatic(photo=FSInputFile(LOGO_FILE)))
+        await m.answer("✅ Bot profil rasmi logotipga almashtirildi.")
+    except Exception as e:
+        await m.answer(f"⚠️ Profil rasmini o'rnatib bo'lmadi: {e}\n"
+                       "@BotFather → /setuserpic orqali qo'lda o'rnating.")
 
 @dp.message(F.text.in_(btn_texts("btn_cancel")))
 async def cancel(m: Message, state: FSMContext):
@@ -308,6 +345,7 @@ async def delivery_in(m: Message, state: FSMContext):
 dp.include_router(logistics_router)
 dp.include_router(currency_router)
 dp.include_router(cert_router)
+dp.include_router(trade_router)
 dp.include_router(admin.build_router())
 
 
