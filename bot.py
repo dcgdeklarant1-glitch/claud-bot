@@ -85,14 +85,11 @@ async def usd_rate() -> float:
 # ---------- Klaviaturalar ----------
 def main_kb(lang):
     t = T[lang]
+    # Har bir xizmat alohida qatorda, hammasi bir xil ko'rinishda
+    keys = ("btn_trade", "btn_calc", "btn_cert", "btn_logistics", "btn_currency",
+            "btn_support", "btn_info", "btn_lang")
     return ReplyKeyboardMarkup(resize_keyboard=True, keyboard=[
-        [KeyboardButton(text=t["btn_trade"], style="success")],
-        [KeyboardButton(text=t["btn_calc"], style="primary")],
-        [KeyboardButton(text=t["btn_cert"], style="primary")],
-        [KeyboardButton(text=t["btn_logistics"], style="success"),
-         KeyboardButton(text=t["btn_currency"], style="success")],
-        [KeyboardButton(text=t["btn_support"])],
-        [KeyboardButton(text=t["btn_info"]), KeyboardButton(text=t["btn_lang"])],
+        [KeyboardButton(text=t[k], style="primary")] for k in keys
     ])
 
 def support_kb(lang):
