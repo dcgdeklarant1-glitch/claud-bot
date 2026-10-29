@@ -18,6 +18,7 @@ from dotenv import load_dotenv
 import rates as R
 import logistics
 import currency
+import certificate
 from calculator import calculate
 from texts import T
 
@@ -70,6 +71,7 @@ def main_kb(lang):
     t = T[lang]
     return ReplyKeyboardMarkup(resize_keyboard=True, keyboard=[
         [KeyboardButton(text=t["btn_calc"], style="primary")],
+        [KeyboardButton(text=t["btn_cert"], style="primary")],
         [KeyboardButton(text=t["btn_logistics"], style="success"),
          KeyboardButton(text=t["btn_currency"], style="success")],
         [KeyboardButton(text=t["btn_support"])],
@@ -125,6 +127,7 @@ def btn_texts(key):
 # Logistika va valyuta kursi alohida modullarda; ularni asosiy menyu tugmalari ochadi
 logistics_router, logistics_start = logistics.build_router(get_lang, main_kb, cancel_kb)
 currency_router, currency_start = currency.build_router(get_lang, main_kb, cancel_kb)
+cert_router, cert_start = certificate.build_router(get_lang, main_kb, cancel_kb)
 
 
 # ---------- Handlerlar ----------
@@ -175,6 +178,10 @@ async def logistics_menu(m: Message, state: FSMContext):
 @dp.message(F.text.in_(btn_texts("btn_currency")))
 async def currency_menu(m: Message, state: FSMContext):
     await currency_start(m, state)
+
+@dp.message(F.text.in_(btn_texts("btn_cert")))
+async def cert_menu(m: Message, state: FSMContext):
+    await cert_start(m, state)
 
 @dp.message(F.text.in_(btn_texts("btn_cancel")))
 async def cancel(m: Message, state: FSMContext):
@@ -280,6 +287,7 @@ async def delivery_in(m: Message, state: FSMContext):
 
 dp.include_router(logistics_router)
 dp.include_router(currency_router)
+dp.include_router(cert_router)
 
 
 async def run_webhook(bot: Bot, base_url: str):
