@@ -23,7 +23,7 @@ import trade
 import admin
 import db
 from calculator import calculate
-from texts import T
+from texts import T, OLD_BTN
 
 load_dotenv()
 TOKEN = os.getenv("BOT_TOKEN")
@@ -85,10 +85,10 @@ async def usd_rate() -> float:
 # ---------- Klaviaturalar ----------
 def main_kb(lang):
     t = T[lang]
-    # Xizmatlar ikki ustunda (har qatorda 2 ta), hammasi bir xil ko'rinishda
+    # Xizmatlar ikki ustunda (har qatorda 2 ta), rangsiz (shaffof) tugmalar
     keys = ("btn_trade", "btn_calc", "btn_cert", "btn_logistics", "btn_currency",
             "btn_support", "btn_info", "btn_lang")
-    buttons = [KeyboardButton(text=t[k], style="primary") for k in keys]
+    buttons = [KeyboardButton(text=t[k]) for k in keys]
     return ReplyKeyboardMarkup(resize_keyboard=True, keyboard=[
         buttons[i:i + 2] for i in range(0, len(buttons), 2)
     ])
@@ -96,31 +96,31 @@ def main_kb(lang):
 def support_kb(lang):
     return InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text=f"{T[lang]['support_btn_write']} @{u}",
-                              url=f"https://t.me/{u}", style="primary")]
+                              url=f"https://t.me/{u}")]
         for u in SUPPORT_USERNAMES
     ])
 
 def cancel_kb(lang, skip=False):
     t = T[lang]
-    rows = [[KeyboardButton(text=t["btn_skip"], style="primary")]] if skip else []
-    rows.append([KeyboardButton(text=t["btn_cancel"], style="danger")])
+    rows = [[KeyboardButton(text=t["btn_skip"])]] if skip else []
+    rows.append([KeyboardButton(text=t["btn_cancel"])])
     return ReplyKeyboardMarkup(resize_keyboard=True, keyboard=rows)
 
 def lang_kb():
     return InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text="🇺🇿 O'zbekcha", callback_data="lang:uz", style="success"),
-         InlineKeyboardButton(text="🇷🇺 Русский", callback_data="lang:ru", style="primary")],
-        [InlineKeyboardButton(text="🇬🇧 English", callback_data="lang:en", style="primary"),
-         InlineKeyboardButton(text="🇨🇳 中文", callback_data="lang:zh", style="success")],
+        [InlineKeyboardButton(text="🇺🇿 O'zbekcha", callback_data="lang:uz"),
+         InlineKeyboardButton(text="🇷🇺 Русский", callback_data="lang:ru")],
+        [InlineKeyboardButton(text="🇬🇧 English", callback_data="lang:en"),
+         InlineKeyboardButton(text="🇨🇳 中文", callback_data="lang:zh")],
     ])
 
 def fuel_kb(lang):
     t = T[lang]
     return InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text=t["fuel_ice"], callback_data="fuel:ice", style="primary")],
-        [InlineKeyboardButton(text=t["fuel_hybrid"], callback_data="fuel:hybrid", style="success")],
-        [InlineKeyboardButton(text=t["fuel_serial"], callback_data="fuel:serial", style="success")],
-        [InlineKeyboardButton(text=t["fuel_ev"], callback_data="fuel:ev", style="primary")],
+        [InlineKeyboardButton(text=t["fuel_ice"], callback_data="fuel:ice")],
+        [InlineKeyboardButton(text=t["fuel_hybrid"], callback_data="fuel:hybrid")],
+        [InlineKeyboardButton(text=t["fuel_serial"], callback_data="fuel:serial")],
+        [InlineKeyboardButton(text=t["fuel_ev"], callback_data="fuel:ev")],
     ])
 
 
@@ -136,7 +136,7 @@ def fmt(n: float) -> str:
     return f"{n:,.0f}".replace(",", " ")
 
 def btn_texts(key):
-    return {T[l][key] for l in T}
+    return {T[l][key] for l in T} | set(OLD_BTN.get(key, ()))
 
 
 # Logistika va valyuta kursi alohida modullarda; ularni asosiy menyu tugmalari ochadi

@@ -29,15 +29,15 @@ class Trade(StatesGroup):
 def direction_kb(lang):
     labels = T[lang]["tr_direction"]
     return InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text=labels["import"], callback_data="tr:dir:import", style="primary"),
-         InlineKeyboardButton(text=labels["export"], callback_data="tr:dir:export", style="success")],
+        [InlineKeyboardButton(text=labels["import"], callback_data="tr:dir:import"),
+         InlineKeyboardButton(text=labels["export"], callback_data="tr:dir:export")],
     ])
 
 def confirm_kb(lang):
     t = T[lang]
     return InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text=t["lg_btn_confirm"], callback_data="tr:confirm", style="success")],
-        [InlineKeyboardButton(text=t["lg_btn_drop"], callback_data="tr:drop", style="danger")],
+        [InlineKeyboardButton(text=t["lg_btn_confirm"], callback_data="tr:confirm")],
+        [InlineKeyboardButton(text=t["lg_btn_drop"], callback_data="tr:drop")],
     ])
 
 

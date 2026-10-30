@@ -40,14 +40,13 @@ def purpose_kb(lang):
 def confirm_kb(lang):
     t = T[lang]
     return InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text=t["lg_btn_confirm"], callback_data="ct:confirm", style="success")],
-        [InlineKeyboardButton(text=t["lg_btn_drop"], callback_data="ct:drop", style="danger")],
+        [InlineKeyboardButton(text=t["lg_btn_confirm"], callback_data="ct:confirm")],
+        [InlineKeyboardButton(text=t["lg_btn_drop"], callback_data="ct:drop")],
     ])
 
 def reply_kb(user_id: int, no: int):
     return InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text=T["uz"]["ct_btn_reply"], callback_data=f"ct:reply:{user_id}:{no}",
-                              style="primary")]
+        [InlineKeyboardButton(text=T["uz"]["ct_btn_reply"], callback_data=f"ct:reply:{user_id}:{no}")]
     ])
 
 

@@ -64,8 +64,7 @@ def option_plain(d: dict, field: str) -> str:
 def menu_kb():
     rows = [[InlineKeyboardButton(text=title, callback_data=f"adm:list:{cat}:0")]
             for cat, title in CATALOGS.items()]
-    rows.append([InlineKeyboardButton(text="📥 Excel'ga yuklab olish", callback_data="adm:xlsx",
-                                      style="success")])
+    rows.append([InlineKeyboardButton(text="📥 Excel'ga yuklab olish", callback_data="adm:xlsx")])
     rows.append([InlineKeyboardButton(text="🔄 Yangilash", callback_data="adm:menu")])
     return InlineKeyboardMarkup(inline_keyboard=rows)
 

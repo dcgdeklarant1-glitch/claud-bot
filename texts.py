@@ -1,118 +1,118 @@
-"""Bot matnlari: o'zbek (uz), rus (ru), ingliz (en) va xitoy (zh)."""
+"""Bot matnlari: oʻzbek (uz), rus (ru), ingliz (en) va xitoy (zh)."""
 
 CHOOSE_LANG = "🌐 Tilni tanlang / Выберите язык / Choose language / 选择语言:"
 
 T = {
     "uz": {
         "choose_lang": CHOOSE_LANG,
-        "bot_description": "Assalomu alaykum! DCG Cargo botiga xush kelibsiz! 🚚\n\nLogistika, valyuta kursi va rastamojka hisob-kitobi.",
+        "bot_description": "Assalomu alaykum! DCG Cargo botiga xush kelibsiz! 🚚\n\nLogistika, valyuta kursi va avtomobil bojxona toʻlovlari hisobi.",
         "bot_short_description": "DCG Cargo rasmiy boti 🚚",
-        "welcome": "👋 <b>ASSALOMU ALAYKUM!</b>\n\n🚚 <b>DCGCargo</b> botiga xush kelibsiz!\n\nQuyidagi tugmani bosing 👇",
-        "btn_calc": "🚗 Rastamojkani hisoblash",
-        "btn_info": "ℹ️ Ma'lumot",
-        "btn_lang": "🌐 Tilni o'zgartirish",
+        "welcome": "👋 <b>Assalomu alaykum!</b>\n\n🚚 <b>DCG Cargo</b> botiga xush kelibsiz!\n\nKerakli boʻlimni tanlang 👇",
+        "btn_calc": "🚗 Bojxona hisobi",
+        "btn_info": "ℹ️ Maʼlumot",
+        "btn_lang": "🌐 Til",
         "btn_cancel": "❌ Bekor qilish",
-        "btn_skip": "⏭ O'tkazib yuborish",
-        "ask_fuel": "⛽️ Yoqilg'i turini tanlang:",
+        "btn_skip": "⏭ Oʻtkazib yuborish",
+        "ask_fuel": "⛽️ Yoqilgʻi turini tanlang:",
         "fuel_ice": "⛽️ Benzin / Dizel",
         "fuel_hybrid": "🔋 Gibrid",
         "fuel_serial": "🔌 Ketma-ket gibrid (EREV)",
-        "fuel_ev": "⚡️ Elektro",
-        "ask_year": "📅 Ishlab chiqarilgan yilini kiriting (masalan: <code>2023</code>):",
-        "bad_year": "❗️ Yilni to'g'ri kiriting (masalan: 2022).",
+        "fuel_ev": "⚡️ Elektr",
+        "ask_year": "📅 Ishlab chiqarilgan yilni kiriting (masalan: <code>2023</code>):",
+        "bad_year": "❗️ Yilni toʻgʻri kiriting (masalan: 2022).",
         "ask_cc": "🔧 Dvigatel hajmini sm³ da kiriting (masalan: <code>1600</code>):",
         "bad_cc": "❗️ Dvigatel hajmini raqamda kiriting (500 – 10000).",
         "ask_price": "💵 Avtomobil narxini AQSh dollarida kiriting (masalan: <code>15000</code>):",
         "bad_num": "❗️ Raqam kiriting (masalan: 15000).",
-        "ask_delivery": "🚚 Yetkazib berish narxi ($)? Bilmasangiz — «O'tkazib yuborish» ni bosing.",
+        "ask_delivery": "🚚 Yetkazib berish narxi ($)? Bilmasangiz, «Oʻtkazib yuborish»ni bosing.",
         "cancelled": "Bekor qilindi.",
-        "too_old": "⛔️ <b>Diqqat:</b> benzin/dizel avtomobillar {max} yildan eski bo'lsa, O'zbekistonga olib kirish taqiqlangan (avtomobil yoshi: {age} yil). Hisob faqat ma'lumot uchun.\n\n",
+        "too_old": "⛔️ <b>Diqqat:</b> {max} yildan eski benzin/dizel avtomobillarni Oʻzbekistonga olib kirish taqiqlangan (avtomobil yoshi: {age} yil). Hisob faqat maʼlumot uchun.\n\n",
         "result": (
             "📊 <b>Hisob natijasi</b>\n\n"
-            "⛽️ Yoqilg'i: {fuel}\n"
+            "⛽️ Yoqilgʻi: {fuel}\n"
             "📅 Yili: {year} ({age} yil)\n"
             "{cc_line}"
             "💵 Narxi: ${price}\n"
             "🚚 Yetkazish: ${delivery}\n"
             "🧾 Bojxona qiymati: ${value}\n"
-            "💱 Kurs: 1$ = {rate} so'm\n\n"
+            "💱 Kurs: 1$ = {rate} soʻm\n\n"
             "━━━━━━━━━━━━━━━\n"
             "🏛 Bojxona boji: ${duty}\n"
             "🧮 QQS (12%): ${vat}\n"
-            "♻️ Utilizatsiya yig'imi: {util_brv} BHM = {util} so'm\n"
-            "📑 Rasmiylashtiruv yig'imi: {clear} so'm\n"
+            "♻️ Utilizatsiya yigʻimi: {util_brv} BHM = {util} soʻm\n"
+            "📑 Rasmiylashtirish yigʻimi: {clear} soʻm\n"
             "━━━━━━━━━━━━━━━\n"
-            "💰 <b>Jami rastamojka: {total} so'm</b>\n"
+            "💰 <b>Jami bojxona toʻlovlari: {total} soʻm</b>\n"
             "≈ <b>${total_usd}</b>\n\n"
-            "🚘 <b>Avto + rastamojka ≈ ${grand}</b>\n\n"
-            "⚠️ <i>Hisob taxminiy. Aniq summa bojxonada belgilanadi.</i>"
+            "🚘 <b>Avtomobil + bojxona ≈ ${grand}</b>\n\n"
+            "⚠️ <i>Hisob taxminiy. Aniq summani bojxona belgilaydi.</i>"
         ),
         "cc_line": "🔧 Dvigatel: {cc} sm³\n",
         "info": (
-            "ℹ️ <b>Hisoblash qanday ishlaydi</b>\n\n"
-            "• Bojxona boji: 1 yilgacha — 15% + $1/sm³; 1–3 yil — 30% + $2.5/sm³; 3 yildan katta — 40% + $3/sm³\n"
-            "• Elektro va ketma-ket gibridlar bojdan ozod\n"
+            "ℹ️ <b>Hisob qanday qilinadi</b>\n\n"
+            "• Bojxona boji: 1 yilgacha — 15% + $1/sm³; 1–3 yil — 30% + $2.5/sm³; 3 yildan oshiq — 40% + $3/sm³\n"
+            "• Elektr va ketma-ket gibrid avtomobillar bojdan ozod\n"
             "• QQS: 12% (qiymat + boj)\n"
-            "• Utilizatsiya yig'imi: BHM da, dvigatel hajmi va yoshga qarab\n"
-            "• 1 BHM = {brv} so'm\n"
-            "• Benzin/dizel: {max} yildan eski, Euro-5 dan past va o'ng rulli avtolar taqiqlangan\n\n"
-            "Kurs O'zbekiston Markaziy banki (cbu.uz) dan olinadi."
+            "• Utilizatsiya yigʻimi: BHM da, dvigatel hajmi va yoshiga qarab\n"
+            "• 1 BHM = {brv} soʻm\n"
+            "• Benzin/dizel: {max} yildan eski, Euro-5 dan past va oʻng rulli avtomobillar taqiqlangan\n\n"
+            "Kurs Oʻzbekiston Markaziy bankidan (cbu.uz) olinadi."
         ),
         # ---------- Logistika / valyuta / yordam ----------
         "btn_logistics": "🚚 Logistika",
         "btn_currency": "💱 Valyuta kursi",
-        "btn_support": "🆘 Qo'llab-quvvatlash",
+        "btn_support": "🆘 Yordam",
         "support": (
-            "🆘 <b>Qo'llab-quvvatlash</b>\n\n"
-            "Savollaringiz bo'lsa, administratorga murojaat qiling:\n\n"
+            "🆘 <b>Yordam</b>\n\n"
+            "Savollaringiz boʻlsa, administratorga yozing:\n\n"
             "{admins}\n"
             "📞 Telefon: {phone}"
         ),
         "support_btn_write": "✍️ Yozish:",
         # ---------- Valyuta kursi ----------
         "cur_title": "💱 <b>Valyuta kurslari</b> ({date})",
-        "cur_sum": "so'm",
-        "cur_source": "<i>Manba: O'zbekiston Markaziy banki (cbu.uz). ▲▼ — kechagi kunga nisbatan o'zgarish.</i>",
-        "cur_btn_convert": "🧮 So'mga hisoblash",
+        "cur_sum": "soʻm",
+        "cur_source": "<i>Manba: Oʻzbekiston Markaziy banki (cbu.uz). ▲▼ — kechagi kunga nisbatan.</i>",
+        "cur_btn_convert": "🧮 Soʻmga hisoblash",
         "cur_btn_refresh": "🔄 Yangilash",
         "cur_refreshed": "Kurslar yangilandi",
-        "cur_pick": "🧮 Qaysi valyutani so'mga hisoblaymiz?",
+        "cur_pick": "🧮 Qaysi valyutani soʻmga hisoblaymiz?",
         "cur_ask_amount": "✍️ Miqdorni {ccy} da kiriting (masalan: <code>1000</code>):",
         "cur_bad_amount": "❗️ Miqdorni raqamda kiriting (masalan: 1500).",
-        "cur_result": "{flag} <b>{amount} {ccy} = {uzs} so'm</b>\n\nKurs: 1 {ccy} = {rate} so'm ({date}, {src})",
-        "cur_source_manual": "<i>Manba: O'zbekiston Markaziy banki (cbu.uz) rasmiy kursi, sana ko'rsatilgan.</i>",
-        "cur_source_alt": "<i>Markaziy bank sayti javob bermadi, bozor kursi ko'rsatilmoqda (open.er-api.com). CBU kursidan biroz farq qilishi mumkin.</i>",
-        "cur_error": "⚠️ Hozir Markaziy bank kurslarini olib bo'lmadi. Birozdan keyin qayta urinib ko'ring.",
-        "lg_intro": "🚚 <b>Yuk tashishga buyurtma</b>\n\nBir nechta savolga javob bering, operatorimiz siz bilan bog'lanadi.",
-        "lg_ask_origin": "📍 <b>Yuk qayerdan olinadi?</b>\n\nManzilni yozing yoki «📍 Lokatsiyani yuborish» tugmasini bosing.",
-        "lg_ask_destination": "🏁 <b>Yuk qayerga yetkaziladi?</b>\n\nManzilni yozing yoki «📍 Lokatsiyani yuborish» tugmasini bosing.",
-        "lg_btn_location": "📍 Lokatsiyani yuborish",
-        "lg_bad_place": "❗️ Manzilni matn bilan yozing yoki lokatsiya yuboring.",
+        "cur_result": "{flag} <b>{amount} {ccy} = {uzs} soʻm</b>\n\nKurs: 1 {ccy} = {rate} soʻm ({date}, {src})",
+        "cur_source_manual": "<i>Manba: Oʻzbekiston Markaziy bankining (cbu.uz) rasmiy kursi.</i>",
+        "cur_source_alt": "<i>Markaziy bank sayti javob bermadi, bozor kursi koʻrsatildi (open.er-api.com). U rasmiy kursdan biroz farq qilishi mumkin.</i>",
+        "cur_error": "⚠️ Hozir kurslarni olib boʻlmadi. Birozdan keyin qayta urinib koʻring.",
+        "lg_intro": "🚚 <b>Yuk tashishga buyurtma</b>\n\nBir nechta savolga javob bering, operatorimiz siz bilan bogʻlanadi.",
+        "lg_ask_origin": "📍 <b>Yuk qayerdan olinadi?</b>\n\nManzilni yozing yoki «📍 Joylashuvni yuborish»ni bosing.",
+        "lg_ask_destination": "🏁 <b>Yuk qayerga yetkaziladi?</b>\n\nManzilni yozing yoki «📍 Joylashuvni yuborish»ni bosing.",
+        "lg_btn_location": "📍 Joylashuvni yuborish",
+        "lg_bad_place": "❗️ Manzilni matn bilan yozing yoki joylashuv yuboring.",
         "lg_ask_cargo": "📦 <b>Yuk turini tanlang:</b>",
-        "lg_ask_cargo_other": "📦 Yuk turini yozing (masalan: <code>avto ehtiyot qismlar</code>):",
-        "lg_ask_weight": "⚖️ <b>Yukning taxminiy og'irligi:</b>",
+        "lg_ask_cargo_other": "📦 Yuk turini yozing (masalan: <code>avto ehtiyot qismlari</code>):",
+        "lg_ask_weight": "⚖️ <b>Yukning taxminiy ogʻirligi:</b>",
         "lg_ask_volume": "📐 <b>Yukning taxminiy hajmi:</b>",
-        "lg_ask_ready": "⏰ <b>Yukingiz qachon tayyor bo'ladi?</b>",
+        "lg_ask_ready": "⏰ <b>Yuk qachon tayyor boʻladi?</b>",
         "lg_ask_ready_other": "📅 Sanani yozing (masalan: <code>15-noyabr</code>):",
-        "lg_ask_phone": "📱 <b>Telefon raqamingiz</b>\n\n«📱 Raqamni yuborish» tugmasini bosing yoki raqamni yozing (masalan: <code>+998901234567</code>).",
+        "lg_ask_phone": "📱 <b>Telefon raqamingiz</b>\n\n«📱 Raqamni yuborish»ni bosing yoki raqamni yozing (masalan: <code>+998901234567</code>).",
         "lg_btn_phone": "📱 Raqamni yuborish",
-        "lg_bad_phone": "❗️ Raqamni to'g'ri yozing (masalan: +998901234567) yoki tugmani bosing.",
-        "lg_use_buttons": "👆 Iltimos, yuqoridagi tugmalardan birini tanlang.",
-        "lg_confirm": "📋 <b>Buyurtmangiz:</b>\n\n{summary}\n\n<b>Hammasi to'g'rimi?</b>",
-        "lg_btn_confirm": "✅ Ha, tasdiqlayman",
+        "lg_bad_phone": "❗️ Raqamni toʻgʻri yozing (masalan: +998901234567) yoki tugmani bosing.",
+        "lg_use_buttons": "👆 Yuqoridagi tugmalardan birini tanlang.",
+        "lg_confirm": "📋 <b>Buyurtmangiz:</b>\n\n{summary}\n\n<b>Hammasi toʻgʻrimi?</b>",
+        "lg_btn_confirm": "✅ Tasdiqlash",
         "lg_btn_edit": "✏️ Tahrirlash",
         "lg_btn_drop": "❌ Bekor qilish",
         "lg_btn_back": "⬅️ Orqaga",
-        "lg_edit_which": "Qaysi qatorni o'zgartirasiz?",
-        "lg_thanks": "✅ <b>Buyurtmangiz qabul qilindi!</b>\n\nBuyurtma raqami: <b>#{no}</b>\nOperatorimiz tez orada siz bilan bog'lanadi.",
+        "lg_edit_which": "Qaysi maʼlumotni oʻzgartirasiz?",
+        "lg_thanks": "✅ <b>Buyurtmangiz qabul qilindi!</b>\n\nBuyurtma raqami: <b>#{no}</b>\nOperatorimiz tez orada siz bilan bogʻlanadi.",
         "lg_admin": "🆕 <b>Yangi logistika buyurtmasi #{no}</b>\n\n👤 Mijoz: {who}\n\n{summary}",
         "lg_field": {
             "origin": "📍 Qayerdan",
             "destination": "🏁 Qayerga",
             "cargo": "📦 Yuk turi",
-            "weight": "⚖️ Og'irligi",
+            "weight": "⚖️ Ogʻirligi",
             "volume": "📐 Hajmi",
-            "ready": "⏰ Tayyor bo'ladi",
+            "ready": "⏰ Tayyor boʻlishi",
             "phone": "📱 Telefon",
         },
         "lg_cargo": {
@@ -130,7 +130,7 @@ T = {
             "w4": "1.5–5 t",
             "w5": "5–10 t",
             "w6": "10–20 t",
-            "w7": "20 t dan ko'p",
+            "w7": "20 t dan koʻp",
         },
         "lg_volume": {
             "v1": "1 m³ gacha",
@@ -138,7 +138,7 @@ T = {
             "v3": "5–15 m³",
             "v4": "15–40 m³",
             "v5": "40–90 m³",
-            "v6": "90 m³ dan ko'p",
+            "v6": "90 m³ dan koʻp",
             "unknown": "🤷 Bilmayman",
         },
         "lg_ready": {
@@ -149,25 +149,25 @@ T = {
             "other": "📅 Boshqa sana",
         },
         # ---------- Sertifikat ----------
-        "btn_cert": "📋 Sertifikat kerakmi?",
-        "ct_intro": "📋 <b>Sertifikat kerakligini aniqlash</b>\n\nTovaringiz haqida bir nechta savolga javob bering, mutaxassisimiz tekshirib, javobni shu yerga yuboradi.",
-        "ct_ask_product": "📦 <b>Tovar nomi va tavsifi</b>\n\nMasalan: <code>bolalar o'yinchog'i, plastik, 3 yoshdan</code>",
-        "ct_ask_code": "🔢 <b>TIF TN kodi</b> (bilsangiz)\n\nBilmasangiz — «O'tkazib yuborish» ni bosing.",
+        "btn_cert": "📋 Sertifikat",
+        "ct_intro": "📋 <b>Sertifikat kerakmi?</b>\n\nTovar haqida bir nechta savolga javob bering. Mutaxassisimiz tekshirib, javobni shu yerga yuboradi.",
+        "ct_ask_product": "📦 <b>Tovar nomi va tavsifi</b>\n\nMasalan: <code>bolalar oʻyinchogʻi, plastik, 3 yoshdan</code>",
+        "ct_ask_code": "🔢 <b>TIF TN kodi</b> (bilsangiz)\n\nBilmasangiz, «Oʻtkazib yuborish»ni bosing.",
         "ct_ask_country": "🌍 <b>Tovar qaysi davlatdan keladi?</b>",
-        "ct_ask_purpose": "🎯 <b>Tovar nima uchun olib kelinmoqda?</b>",
-        "ct_ask_file": "📎 <b>Tovar rasmi yoki hujjat</b> (invoys, yorliq)\n\nRasm yoki fayl yuboring. Yo'q bo'lsa — «O'tkazib yuborish» ni bosing.",
-        "ct_bad_text": "❗️ Iltimos, matn bilan yozing.",
-        "ct_bad_file": "❗️ Rasm yoki fayl yuboring, yoki «O'tkazib yuborish» ni bosing.",
-        "ct_confirm": "📋 <b>Arizangiz:</b>\n\n{summary}\n\n<b>Hammasi to'g'rimi?</b>",
-        "ct_thanks": "✅ <b>Arizangiz qabul qilindi!</b>\n\nAriza raqami: <b>#{no}</b>\nMutaxassisimiz tekshirib, javobni shu yerga yuboradi.",
+        "ct_ask_purpose": "🎯 <b>Tovar nima maqsadda olib kelinmoqda?</b>",
+        "ct_ask_file": "📎 <b>Tovar rasmi yoki hujjati</b> (invoys, yorliq)\n\nRasm yoki fayl yuboring. Boʻlmasa, «Oʻtkazib yuborish»ni bosing.",
+        "ct_bad_text": "❗️ Matn bilan yozing.",
+        "ct_bad_file": "❗️ Rasm yoki fayl yuboring yoki «Oʻtkazib yuborish»ni bosing.",
+        "ct_confirm": "📋 <b>Arizangiz:</b>\n\n{summary}\n\n<b>Hammasi toʻgʻrimi?</b>",
+        "ct_thanks": "✅ <b>Arizangiz qabul qilindi!</b>\n\nAriza raqami: <b>#{no}</b>\nMutaxassisimiz javobni shu yerga yuboradi.",
         "ct_answer": "📋 <b>Mutaxassis javobi (ariza #{no}):</b>",
         "ct_file_yes": "📎 Biriktirilgan",
         "ct_none": "—",
-        "ct_admin": "🆕 <b>Sertifikat bo'yicha ariza #{no}</b>\n\n👤 Mijoz: {who}\n\n{summary}",
+        "ct_admin": "🆕 <b>Sertifikat boʻyicha ariza #{no}</b>\n\n👤 Mijoz: {who}\n\n{summary}",
         "ct_btn_reply": "✍️ Javob berish",
-        "ct_ask_reply": "✍️ <b>#{no}</b> arizaga javobingizni yozing (matn, rasm yoki fayl). Mijozga bot orqali yuboriladi.",
+        "ct_ask_reply": "✍️ <b>#{no}</b> arizaga javob yozing (matn, rasm yoki fayl). Javob mijozga bot orqali yuboriladi.",
         "ct_reply_sent": "✅ #{no} arizaga javob mijozga yuborildi.",
-        "ct_reply_fail": "⚠️ #{no} arizaga javobni mijozga yuborib bo'lmadi (botni bloklagan bo'lishi mumkin).",
+        "ct_reply_fail": "⚠️ #{no} arizaga javobni yuborib boʻlmadi (mijoz botni bloklagan boʻlishi mumkin).",
         "ct_field": {
             "product": "📦 Tovar",
             "code": "🔢 TIF TN kodi",
@@ -178,21 +178,21 @@ T = {
         },
         "ct_purpose": {
             "sale": "🏪 Sotish uchun",
-            "personal": "🏠 Shaxsiy foydalanish",
+            "personal": "🏠 Shaxsiy foydalanish uchun",
         },
-        "btn_trade": "🌍 Import / Eksport zakaz",
-        "tr_intro": "🌐 <b>Import / eksport uchun zakaz</b>\n\nBir nechta savolga javob bering — menejerimiz siz bilan bog'lanadi.\n\n❗️ Zakaz faqat <b>telefon raqami</b> bilan qabul qilinadi.",
+        "btn_trade": "🌍 Import / Eksport",
+        "tr_intro": "🌍 <b>Import / eksport buyurtmasi</b>\n\nBir nechta savolga javob bering, menejerimiz siz bilan bogʻlanadi.\n\n❗️ Buyurtma faqat <b>telefon raqami</b> bilan qabul qilinadi.",
         "tr_ask_direction": "🔀 <b>Qaysi xizmat kerak?</b>",
         "tr_ask_product": "📦 <b>Tovar nomi</b>\n\nMasalan: <code>maishiy texnika, 2 ta konteyner</code>",
         "tr_ask_country_import": "🌍 <b>Tovar qaysi davlatdan olib kelinadi?</b>",
         "tr_ask_country_export": "🌍 <b>Tovar qaysi davlatga olib chiqiladi?</b>",
-        "tr_ask_volume": "⚖️ <b>Taxminiy hajmi yoki og'irligi</b>\n\nMasalan: <code>20 tonna</code>, <code>1 fura</code>. Bilmasangiz — «O'tkazib yuborish» ni bosing.",
+        "tr_ask_volume": "⚖️ <b>Taxminiy hajmi yoki ogʻirligi</b>\n\nMasalan: <code>20 tonna</code>, <code>1 fura</code>. Bilmasangiz, «Oʻtkazib yuborish»ni bosing.",
         "tr_ask_name": "👤 <b>Ismingiz yoki kompaniya nomi</b>",
-        "tr_ask_phone": "📱 <b>Telefon raqamingiz (majburiy)</b>\n\nRaqamsiz zakaz qabul qilinmaydi. «📱 Raqamni yuborish» tugmasini bosing yoki yozing (masalan: <code>+998901234567</code>).",
-        "tr_bad_phone": "❗️ Telefon raqami majburiy. Raqamni to'g'ri yozing (masalan: +998901234567) yoki «📱 Raqamni yuborish» tugmasini bosing.",
-        "tr_confirm": "🌐 <b>Zakazingiz:</b>\n\n{summary}\n\n<b>Hammasi to'g'rimi?</b>",
-        "tr_thanks": "✅ <b>Zakazingiz qabul qilindi!</b>\n\nZakaz raqami: <b>#{no}</b>\nMenejerimiz tez orada siz bilan bog'lanadi.",
-        "tr_admin": "🆕 <b>Import / eksport zakazi #{no}</b>\n\n👤 Mijoz: {who}\n\n{summary}",
+        "tr_ask_phone": "📱 <b>Telefon raqamingiz (majburiy)</b>\n\n«📱 Raqamni yuborish»ni bosing yoki raqamni yozing (masalan: <code>+998901234567</code>).",
+        "tr_bad_phone": "❗️ Telefon raqami majburiy. Raqamni toʻgʻri yozing (masalan: +998901234567) yoki «📱 Raqamni yuborish»ni bosing.",
+        "tr_confirm": "🌍 <b>Buyurtmangiz:</b>\n\n{summary}\n\n<b>Hammasi toʻgʻrimi?</b>",
+        "tr_thanks": "✅ <b>Buyurtmangiz qabul qilindi!</b>\n\nBuyurtma raqami: <b>#{no}</b>\nMenejerimiz tez orada siz bilan bogʻlanadi.",
+        "tr_admin": "🆕 <b>Import / eksport buyurtmasi #{no}</b>\n\n👤 Mijoz: {who}\n\n{summary}",
         "tr_field": {
             "direction": "🔀 Xizmat",
             "product": "📦 Tovar",
@@ -208,12 +208,12 @@ T = {
     },
     "ru": {
         "choose_lang": CHOOSE_LANG,
-        "bot_description": "Здравствуйте! Добро пожаловать в бот DCG Cargo! 🚚\n\nЛогистика, курсы валют и расчёт растаможки.",
+        "bot_description": "Здравствуйте! Добро пожаловать в бот DCG Cargo! 🚚\n\nЛогистика, курсы валют и расчёт растаможки авто.",
         "bot_short_description": "Официальный бот DCG Cargo 🚚",
-        "welcome": "👋 <b>Здравствуйте!</b>\n\n🚚 Добро пожаловать в бот <b>DCGCargo</b>!\n\nНажмите кнопку ниже 👇",
-        "btn_calc": "🚗 Рассчитать растаможку",
-        "btn_info": "ℹ️ Информация",
-        "btn_lang": "🌐 Сменить язык",
+        "welcome": "👋 <b>Здравствуйте!</b>\n\n🚚 Добро пожаловать в бот <b>DCG Cargo</b>!\n\nВыберите нужный раздел 👇",
+        "btn_calc": "🚗 Растаможка авто",
+        "btn_info": "ℹ️ Справка",
+        "btn_lang": "🌐 Язык",
         "btn_cancel": "❌ Отмена",
         "btn_skip": "⏭ Пропустить",
         "ask_fuel": "⛽️ Выберите тип топлива:",
@@ -222,14 +222,14 @@ T = {
         "fuel_serial": "🔌 Последовательный гибрид (EREV)",
         "fuel_ev": "⚡️ Электро",
         "ask_year": "📅 Введите год выпуска (например: <code>2023</code>):",
-        "bad_year": "❗️ Введите корректный год (например: 2022).",
+        "bad_year": "❗️ Введите правильный год (например: 2022).",
         "ask_cc": "🔧 Введите объём двигателя в см³ (например: <code>1600</code>):",
-        "bad_cc": "❗️ Введите объём числом (500 – 10000).",
-        "ask_price": "💵 Введите стоимость авто в долларах США (например: <code>15000</code>):",
+        "bad_cc": "❗️ Введите объём двигателя числом (500 – 10000).",
+        "ask_price": "💵 Введите цену авто в долларах США (например: <code>15000</code>):",
         "bad_num": "❗️ Введите число (например: 15000).",
-        "ask_delivery": "🚚 Стоимость доставки ($)? Если не знаете — нажмите «Пропустить».",
+        "ask_delivery": "🚚 Стоимость доставки ($)? Если не знаете, нажмите «Пропустить».",
         "cancelled": "Отменено.",
-        "too_old": "⛔️ <b>Внимание:</b> ввоз бензиновых/дизельных авто старше {max} лет в Узбекистан запрещён (возраст авто: {age} лет). Расчёт только для информации.\n\n",
+        "too_old": "⛔️ <b>Внимание:</b> ввоз бензиновых и дизельных авто старше {max} лет в Узбекистан запрещён (возраст авто: {age} лет). Расчёт только для информации.\n\n",
         "result": (
             "📊 <b>Результат расчёта</b>\n\n"
             "⛽️ Топливо: {fuel}\n"
@@ -252,14 +252,14 @@ T = {
         ),
         "cc_line": "🔧 Двигатель: {cc} см³\n",
         "info": (
-            "ℹ️ <b>Как работает расчёт</b>\n\n"
+            "ℹ️ <b>Как считается растаможка</b>\n\n"
             "• Пошлина: до 1 года — 15% + $1/см³; 1–3 года — 30% + $2.5/см³; старше 3 лет — 40% + $3/см³\n"
-            "• Электро и последовательные гибриды освобождены от пошлины\n"
+            "• Электромобили и последовательные гибриды освобождены от пошлины\n"
             "• НДС: 12% (стоимость + пошлина)\n"
-            "• Утильсбор: в БРВ, зависит от объёма и возраста\n"
+            "• Утильсбор: в БРВ, зависит от объёма двигателя и возраста\n"
             "• 1 БРВ = {brv} сум\n"
             "• Бензин/дизель: запрещены авто старше {max} лет, ниже Euro-5 и праворульные\n\n"
-            "Курс берётся с сайта Центрального банка Узбекистана (cbu.uz)."
+            "Курс — Центральный банк Узбекистана (cbu.uz)."
         ),
         # ---------- Логистика / валюта / поддержка ----------
         "btn_logistics": "🚚 Логистика",
@@ -267,7 +267,7 @@ T = {
         "btn_support": "🆘 Поддержка",
         "support": (
             "🆘 <b>Поддержка</b>\n\n"
-            "Если у вас есть вопросы, свяжитесь с администратором:\n\n"
+            "Если есть вопросы, напишите администратору:\n\n"
             "{admins}\n"
             "📞 Телефон: {phone}"
         ),
@@ -275,7 +275,7 @@ T = {
         # ---------- Курс валют ----------
         "cur_title": "💱 <b>Курсы валют</b> ({date})",
         "cur_sum": "сум",
-        "cur_source": "<i>Источник: Центральный банк Узбекистана (cbu.uz). ▲▼ — изменение к вчерашнему дню.</i>",
+        "cur_source": "<i>Источник: Центральный банк Узбекистана (cbu.uz). ▲▼ — изменение за день.</i>",
         "cur_btn_convert": "🧮 Перевести в сумы",
         "cur_btn_refresh": "🔄 Обновить",
         "cur_refreshed": "Курсы обновлены",
@@ -283,14 +283,14 @@ T = {
         "cur_ask_amount": "✍️ Введите сумму в {ccy} (например: <code>1000</code>):",
         "cur_bad_amount": "❗️ Введите сумму числом (например: 1500).",
         "cur_result": "{flag} <b>{amount} {ccy} = {uzs} сум</b>\n\nКурс: 1 {ccy} = {rate} сум ({date}, {src})",
-        "cur_source_manual": "<i>Источник: официальный курс Центрального банка Узбекистана (cbu.uz) на указанную дату.</i>",
-        "cur_source_alt": "<i>Сайт ЦБ не ответил, показан рыночный курс (open.er-api.com). Может немного отличаться от курса ЦБ.</i>",
-        "cur_error": "⚠️ Сейчас не удалось получить курсы ЦБ. Попробуйте чуть позже.",
+        "cur_source_manual": "<i>Источник: официальный курс Центрального банка Узбекистана (cbu.uz).</i>",
+        "cur_source_alt": "<i>Сайт ЦБ не ответил, показан рыночный курс (open.er-api.com). Он может немного отличаться от официального.</i>",
+        "cur_error": "⚠️ Сейчас не удалось получить курсы. Попробуйте чуть позже.",
         "lg_intro": "🚚 <b>Заявка на перевозку груза</b>\n\nОтветьте на несколько вопросов, и наш оператор свяжется с вами.",
-        "lg_ask_origin": "📍 <b>Откуда забрать груз?</b>\n\nНапишите адрес или нажмите «📍 Отправить локацию».",
-        "lg_ask_destination": "🏁 <b>Куда доставить груз?</b>\n\nНапишите адрес или нажмите «📍 Отправить локацию».",
-        "lg_btn_location": "📍 Отправить локацию",
-        "lg_bad_place": "❗️ Напишите адрес текстом или отправьте локацию.",
+        "lg_ask_origin": "📍 <b>Откуда забрать груз?</b>\n\nНапишите адрес или нажмите «📍 Отправить геолокацию».",
+        "lg_ask_destination": "🏁 <b>Куда доставить груз?</b>\n\nНапишите адрес или нажмите «📍 Отправить геолокацию».",
+        "lg_btn_location": "📍 Отправить геолокацию",
+        "lg_bad_place": "❗️ Напишите адрес текстом или отправьте геолокацию.",
         "lg_ask_cargo": "📦 <b>Выберите тип груза:</b>",
         "lg_ask_cargo_other": "📦 Напишите тип груза (например: <code>автозапчасти</code>):",
         "lg_ask_weight": "⚖️ <b>Примерный вес груза:</b>",
@@ -299,10 +299,10 @@ T = {
         "lg_ask_ready_other": "📅 Напишите дату (например: <code>15 ноября</code>):",
         "lg_ask_phone": "📱 <b>Ваш номер телефона</b>\n\nНажмите «📱 Отправить номер» или напишите номер (например: <code>+998901234567</code>).",
         "lg_btn_phone": "📱 Отправить номер",
-        "lg_bad_phone": "❗️ Введите корректный номер (например: +998901234567) или нажмите кнопку.",
-        "lg_use_buttons": "👆 Пожалуйста, выберите один из вариантов выше.",
+        "lg_bad_phone": "❗️ Введите правильный номер (например: +998901234567) или нажмите кнопку.",
+        "lg_use_buttons": "👆 Выберите один из вариантов выше.",
         "lg_confirm": "📋 <b>Ваша заявка:</b>\n\n{summary}\n\n<b>Всё верно?</b>",
-        "lg_btn_confirm": "✅ Да, подтверждаю",
+        "lg_btn_confirm": "✅ Подтвердить",
         "lg_btn_edit": "✏️ Изменить",
         "lg_btn_drop": "❌ Отменить",
         "lg_btn_back": "⬅️ Назад",
@@ -348,21 +348,21 @@ T = {
             "now": "✅ Уже готов",
             "today": "Сегодня",
             "tomorrow": "Завтра",
-            "days": "В течение 2–3 дней",
+            "days": "Через 2–3 дня",
             "other": "📅 Другая дата",
         },
         # ---------- Сертификат ----------
-        "btn_cert": "📋 Нужен сертификат?",
-        "ct_intro": "📋 <b>Нужен ли сертификат</b>\n\nОтветьте на несколько вопросов о товаре — наш специалист проверит и пришлёт ответ сюда.",
+        "btn_cert": "📋 Сертификат",
+        "ct_intro": "📋 <b>Нужен ли сертификат?</b>\n\nОтветьте на несколько вопросов о товаре. Наш специалист проверит и пришлёт ответ сюда.",
         "ct_ask_product": "📦 <b>Название и описание товара</b>\n\nНапример: <code>детская игрушка, пластик, от 3 лет</code>",
-        "ct_ask_code": "🔢 <b>Код ТН ВЭД</b> (если знаете)\n\nЕсли не знаете — нажмите «Пропустить».",
+        "ct_ask_code": "🔢 <b>Код ТН ВЭД</b> (если знаете)\n\nЕсли не знаете, нажмите «Пропустить».",
         "ct_ask_country": "🌍 <b>Из какой страны везёте товар?</b>",
         "ct_ask_purpose": "🎯 <b>Для чего ввозится товар?</b>",
-        "ct_ask_file": "📎 <b>Фото товара или документ</b> (инвойс, этикетка)\n\nОтправьте фото или файл. Если нет — нажмите «Пропустить».",
-        "ct_bad_text": "❗️ Пожалуйста, напишите текстом.",
-        "ct_bad_file": "❗️ Отправьте фото или файл, либо нажмите «Пропустить».",
+        "ct_ask_file": "📎 <b>Фото товара или документ</b> (инвойс, этикетка)\n\nОтправьте фото или файл. Если нет, нажмите «Пропустить».",
+        "ct_bad_text": "❗️ Напишите текстом.",
+        "ct_bad_file": "❗️ Отправьте фото или файл либо нажмите «Пропустить».",
         "ct_confirm": "📋 <b>Ваша заявка:</b>\n\n{summary}\n\n<b>Всё верно?</b>",
-        "ct_thanks": "✅ <b>Заявка принята!</b>\n\nНомер заявки: <b>#{no}</b>\nНаш специалист проверит и пришлёт ответ сюда.",
+        "ct_thanks": "✅ <b>Заявка принята!</b>\n\nНомер заявки: <b>#{no}</b>\nНаш специалист пришлёт ответ сюда.",
         "ct_answer": "📋 <b>Ответ специалиста (заявка #{no}):</b>",
         "ct_file_yes": "📎 Прикреплено",
         "ct_none": "—",
@@ -378,17 +378,17 @@ T = {
             "sale": "🏪 Для продажи",
             "personal": "🏠 Для личного пользования",
         },
-        "btn_trade": "🌍 Заказ импорт / экспорт",
-        "tr_intro": "🌐 <b>Заказ на импорт / экспорт</b>\n\nОтветьте на несколько вопросов — наш менеджер свяжется с вами.\n\n❗️ Заказ принимается только с <b>номером телефона</b>.",
+        "btn_trade": "🌍 Импорт / Экспорт",
+        "tr_intro": "🌍 <b>Заказ на импорт / экспорт</b>\n\nОтветьте на несколько вопросов, и наш менеджер свяжется с вами.\n\n❗️ Заказ принимается только с <b>номером телефона</b>.",
         "tr_ask_direction": "🔀 <b>Какая услуга нужна?</b>",
         "tr_ask_product": "📦 <b>Название товара</b>\n\nНапример: <code>бытовая техника, 2 контейнера</code>",
         "tr_ask_country_import": "🌍 <b>Из какой страны ввозится товар?</b>",
         "tr_ask_country_export": "🌍 <b>В какую страну вывозится товар?</b>",
-        "tr_ask_volume": "⚖️ <b>Примерный объём или вес</b>\n\nНапример: <code>20 тонн</code>, <code>1 фура</code>. Если не знаете — нажмите «Пропустить».",
+        "tr_ask_volume": "⚖️ <b>Примерный объём или вес</b>\n\nНапример: <code>20 тонн</code>, <code>1 фура</code>. Если не знаете, нажмите «Пропустить».",
         "tr_ask_name": "👤 <b>Ваше имя или название компании</b>",
-        "tr_ask_phone": "📱 <b>Ваш номер телефона (обязательно)</b>\n\nБез номера заказ не принимается. Нажмите «📱 Отправить номер» или напишите (например: <code>+998901234567</code>).",
-        "tr_bad_phone": "❗️ Номер телефона обязателен. Введите корректный номер (например: +998901234567) или нажмите «📱 Отправить номер».",
-        "tr_confirm": "🌐 <b>Ваш заказ:</b>\n\n{summary}\n\n<b>Всё верно?</b>",
+        "tr_ask_phone": "📱 <b>Ваш номер телефона (обязательно)</b>\n\nНажмите «📱 Отправить номер» или напишите номер (например: <code>+998901234567</code>).",
+        "tr_bad_phone": "❗️ Номер телефона обязателен. Введите правильный номер (например: +998901234567) или нажмите «📱 Отправить номер».",
+        "tr_confirm": "🌍 <b>Ваш заказ:</b>\n\n{summary}\n\n<b>Всё верно?</b>",
         "tr_thanks": "✅ <b>Заказ принят!</b>\n\nНомер заказа: <b>#{no}</b>\nНаш менеджер скоро свяжется с вами.",
         "tr_field": {
             "direction": "🔀 Услуга",
@@ -405,12 +405,12 @@ T = {
     },
     "en": {
         "choose_lang": CHOOSE_LANG,
-        "bot_description": "Hello! Welcome to the DCG Cargo bot! 🚚\n\nLogistics, currency rates and Uzbekistan car customs calculator.",
+        "bot_description": "Hello! Welcome to the DCG Cargo bot! 🚚\n\nLogistics, exchange rates and car customs calculator for Uzbekistan.",
         "bot_short_description": "Official DCG Cargo bot 🚚",
-        "welcome": "👋 <b>Hello!</b>\n\n🚚 Welcome to the <b>DCGCargo</b> bot!\n\nTap a button below 👇",
-        "btn_calc": "🚗 Car customs calculator",
+        "welcome": "👋 <b>Hello!</b>\n\n🚚 Welcome to the <b>DCG Cargo</b> bot!\n\nChoose a section below 👇",
+        "btn_calc": "🚗 Car customs",
         "btn_info": "ℹ️ Info",
-        "btn_lang": "🌐 Change language",
+        "btn_lang": "🌐 Language",
         "btn_cancel": "❌ Cancel",
         "btn_skip": "⏭ Skip",
         "ask_fuel": "⛽️ Choose the fuel type:",
@@ -419,14 +419,14 @@ T = {
         "fuel_serial": "🔌 Series hybrid (EREV)",
         "fuel_ev": "⚡️ Electric",
         "ask_year": "📅 Enter the year of manufacture (e.g. <code>2023</code>):",
-        "bad_year": "❗️ Please enter a valid year (e.g. 2022).",
-        "ask_cc": "🔧 Enter the engine volume in cm³ (e.g. <code>1600</code>):",
-        "bad_cc": "❗️ Enter the engine volume as a number (500 – 10000).",
+        "bad_year": "❗️ Enter a valid year (e.g. 2022).",
+        "ask_cc": "🔧 Enter the engine size in cm³ (e.g. <code>1600</code>):",
+        "bad_cc": "❗️ Enter the engine size as a number (500 – 10000).",
         "ask_price": "💵 Enter the car price in US dollars (e.g. <code>15000</code>):",
         "bad_num": "❗️ Enter a number (e.g. 15000).",
         "ask_delivery": "🚚 Delivery cost ($)? If you don't know, tap «Skip».",
         "cancelled": "Cancelled.",
-        "too_old": "⛔️ <b>Note:</b> importing petrol/diesel cars older than {max} years into Uzbekistan is prohibited (car age: {age} years). This calculation is for information only.\n\n",
+        "too_old": "⛔️ <b>Note:</b> petrol/diesel cars older than {max} years cannot be imported into Uzbekistan (car age: {age} years). This calculation is for information only.\n\n",
         "result": (
             "📊 <b>Calculation result</b>\n\n"
             "⛽️ Fuel: {fuel}\n"
@@ -445,49 +445,49 @@ T = {
             "💰 <b>Total customs payments: {total} UZS</b>\n"
             "≈ <b>${total_usd}</b>\n\n"
             "🚘 <b>Car + customs ≈ ${grand}</b>\n\n"
-            "⚠️ <i>This is an estimate. The exact amount is set by customs.</i>"
+            "⚠️ <i>This is an estimate. Customs sets the exact amount.</i>"
         ),
         "cc_line": "🔧 Engine: {cc} cm³\n",
         "info": (
             "ℹ️ <b>How the calculation works</b>\n\n"
             "• Customs duty: up to 1 year — 15% + $1/cm³; 1–3 years — 30% + $2.5/cm³; over 3 years — 40% + $3/cm³\n"
-            "• Electric cars and series hybrids are exempt from duty\n"
+            "• Electric cars and series hybrids are duty-free\n"
             "• VAT: 12% (value + duty)\n"
-            "• Recycling fee: in BCV, depends on engine volume and age\n"
+            "• Recycling fee: in BCV, based on engine size and age\n"
             "• 1 BCV (base calculation value) = {brv} UZS\n"
-            "• Petrol/diesel: cars older than {max} years, below Euro-5 and right-hand drive are prohibited\n\n"
-            "Rates are taken from the Central Bank of Uzbekistan (cbu.uz)."
+            "• Petrol/diesel: cars older than {max} years, below Euro-5 or right-hand drive are banned\n\n"
+            "Exchange rate: Central Bank of Uzbekistan (cbu.uz)."
         ),
         # ---------- Logistics / currency / support ----------
         "btn_logistics": "🚚 Logistics",
-        "btn_currency": "💱 Currency rates",
+        "btn_currency": "💱 Exchange rates",
         "btn_support": "🆘 Support",
         "support": (
             "🆘 <b>Support</b>\n\n"
-            "If you have any questions, contact our administrators:\n\n"
+            "If you have questions, message our administrators:\n\n"
             "{admins}\n"
             "📞 Phone: {phone}"
         ),
         "support_btn_write": "✍️ Message:",
         # ---------- Currency rates ----------
-        "cur_title": "💱 <b>Currency rates</b> ({date})",
+        "cur_title": "💱 <b>Exchange rates</b> ({date})",
         "cur_sum": "UZS",
         "cur_source": "<i>Source: Central Bank of Uzbekistan (cbu.uz). ▲▼ — change since yesterday.</i>",
         "cur_btn_convert": "🧮 Convert to UZS",
         "cur_btn_refresh": "🔄 Refresh",
         "cur_refreshed": "Rates updated",
-        "cur_pick": "🧮 Which currency do you want to convert to UZS?",
+        "cur_pick": "🧮 Which currency should we convert to UZS?",
         "cur_ask_amount": "✍️ Enter the amount in {ccy} (e.g. <code>1000</code>):",
         "cur_bad_amount": "❗️ Enter the amount as a number (e.g. 1500).",
         "cur_result": "{flag} <b>{amount} {ccy} = {uzs} UZS</b>\n\nRate: 1 {ccy} = {rate} UZS ({date}, {src})",
-        "cur_source_manual": "<i>Source: official rate of the Central Bank of Uzbekistan (cbu.uz) for the date shown.</i>",
-        "cur_source_alt": "<i>The Central Bank website did not respond, showing the market rate (open.er-api.com). It may differ slightly from the CBU rate.</i>",
-        "cur_error": "⚠️ Could not get the Central Bank rates right now. Please try again a bit later.",
-        "lg_intro": "🚚 <b>Cargo transportation request</b>\n\nAnswer a few questions and our operator will contact you.",
-        "lg_ask_origin": "📍 <b>Where should the cargo be picked up?</b>\n\nType the address or tap «📍 Send location».",
-        "lg_ask_destination": "🏁 <b>Where should the cargo be delivered?</b>\n\nType the address or tap «📍 Send location».",
+        "cur_source_manual": "<i>Source: official rate of the Central Bank of Uzbekistan (cbu.uz).</i>",
+        "cur_source_alt": "<i>The Central Bank website did not respond, so the market rate is shown (open.er-api.com). It may differ slightly from the official rate.</i>",
+        "cur_error": "⚠️ Couldn't get the rates right now. Please try again later.",
+        "lg_intro": "🚚 <b>Cargo transport request</b>\n\nAnswer a few questions and our operator will contact you.",
+        "lg_ask_origin": "📍 <b>Where should we pick up the cargo?</b>\n\nType the address or tap «📍 Send location».",
+        "lg_ask_destination": "🏁 <b>Where should we deliver the cargo?</b>\n\nType the address or tap «📍 Send location».",
         "lg_btn_location": "📍 Send location",
-        "lg_bad_place": "❗️ Type the address as text or send a location.",
+        "lg_bad_place": "❗️ Type the address or send a location.",
         "lg_ask_cargo": "📦 <b>Choose the cargo type:</b>",
         "lg_ask_cargo_other": "📦 Type the cargo type (e.g. <code>car spare parts</code>):",
         "lg_ask_weight": "⚖️ <b>Approximate cargo weight:</b>",
@@ -499,12 +499,12 @@ T = {
         "lg_bad_phone": "❗️ Enter a valid number (e.g. +998901234567) or tap the button.",
         "lg_use_buttons": "👆 Please choose one of the options above.",
         "lg_confirm": "📋 <b>Your request:</b>\n\n{summary}\n\n<b>Is everything correct?</b>",
-        "lg_btn_confirm": "✅ Yes, confirm",
+        "lg_btn_confirm": "✅ Confirm",
         "lg_btn_edit": "✏️ Edit",
         "lg_btn_drop": "❌ Cancel",
         "lg_btn_back": "⬅️ Back",
         "lg_edit_which": "What would you like to change?",
-        "lg_thanks": "✅ <b>Your request has been received!</b>\n\nRequest number: <b>#{no}</b>\nOur operator will contact you soon.",
+        "lg_thanks": "✅ <b>Request received!</b>\n\nRequest number: <b>#{no}</b>\nOur operator will contact you soon.",
         "lg_admin": "🆕 <b>New logistics request #{no}</b>\n\n👤 Client: {who}\n\n{summary}",
         "lg_field": {
             "origin": "📍 From",
@@ -539,27 +539,27 @@ T = {
             "v4": "15–40 m³",
             "v5": "40–90 m³",
             "v6": "over 90 m³",
-            "unknown": "🤷 Don't know",
+            "unknown": "🤷 Not sure",
         },
         "lg_ready": {
             "now": "✅ Ready now",
             "today": "Today",
             "tomorrow": "Tomorrow",
-            "days": "Within 2–3 days",
+            "days": "In 2–3 days",
             "other": "📅 Other date",
         },
         # ---------- Certificate ----------
-        "btn_cert": "📋 Need a certificate?",
-        "ct_intro": "📋 <b>Do you need a certificate?</b>\n\nAnswer a few questions about your goods — our specialist will check and send the answer here.",
+        "btn_cert": "📋 Certificate",
+        "ct_intro": "📋 <b>Do you need a certificate?</b>\n\nAnswer a few questions about your goods. Our specialist will check and reply here.",
         "ct_ask_product": "📦 <b>Product name and description</b>\n\nFor example: <code>children's toy, plastic, 3+ years</code>",
-        "ct_ask_code": "🔢 <b>HS code</b> (if you know it)\n\nIf not — press «Skip».",
+        "ct_ask_code": "🔢 <b>HS code</b> (if you know it)\n\nIf not, tap «Skip».",
         "ct_ask_country": "🌍 <b>Which country are the goods coming from?</b>",
-        "ct_ask_purpose": "🎯 <b>What are the goods imported for?</b>",
-        "ct_ask_file": "📎 <b>Product photo or document</b> (invoice, label)\n\nSend a photo or file. If you don't have one — press «Skip».",
-        "ct_bad_text": "❗️ Please type it as text.",
-        "ct_bad_file": "❗️ Send a photo or file, or press «Skip».",
+        "ct_ask_purpose": "🎯 <b>Why are the goods being imported?</b>",
+        "ct_ask_file": "📎 <b>Product photo or document</b> (invoice, label)\n\nSend a photo or file. If you don't have one, tap «Skip».",
+        "ct_bad_text": "❗️ Please send it as text.",
+        "ct_bad_file": "❗️ Send a photo or file, or tap «Skip».",
         "ct_confirm": "📋 <b>Your request:</b>\n\n{summary}\n\n<b>Is everything correct?</b>",
-        "ct_thanks": "✅ <b>Request received!</b>\n\nRequest number: <b>#{no}</b>\nOur specialist will check and send the answer here.",
+        "ct_thanks": "✅ <b>Request received!</b>\n\nRequest number: <b>#{no}</b>\nOur specialist will reply here.",
         "ct_answer": "📋 <b>Specialist's answer (request #{no}):</b>",
         "ct_file_yes": "📎 Attached",
         "ct_none": "—",
@@ -575,17 +575,17 @@ T = {
             "sale": "🏪 For sale",
             "personal": "🏠 Personal use",
         },
-        "btn_trade": "🌍 Import / Export order",
-        "tr_intro": "🌐 <b>Import / export order</b>\n\nAnswer a few questions — our manager will contact you.\n\n❗️ Orders are accepted only with a <b>phone number</b>.",
+        "btn_trade": "🌍 Import / Export",
+        "tr_intro": "🌍 <b>Import / export order</b>\n\nAnswer a few questions and our manager will contact you.\n\n❗️ Orders are accepted only with a <b>phone number</b>.",
         "tr_ask_direction": "🔀 <b>Which service do you need?</b>",
         "tr_ask_product": "📦 <b>Product name</b>\n\nFor example: <code>home appliances, 2 containers</code>",
         "tr_ask_country_import": "🌍 <b>Which country are the goods imported from?</b>",
         "tr_ask_country_export": "🌍 <b>Which country are the goods exported to?</b>",
-        "tr_ask_volume": "⚖️ <b>Approximate volume or weight</b>\n\nFor example: <code>20 tons</code>, <code>1 truck</code>. If you don't know — press «Skip».",
+        "tr_ask_volume": "⚖️ <b>Approximate volume or weight</b>\n\nFor example: <code>20 tons</code>, <code>1 truck</code>. If you don't know, tap «Skip».",
         "tr_ask_name": "👤 <b>Your name or company name</b>",
-        "tr_ask_phone": "📱 <b>Your phone number (required)</b>\n\nOrders without a number are not accepted. Tap «📱 Send number» or type it (e.g. <code>+998901234567</code>).",
+        "tr_ask_phone": "📱 <b>Your phone number (required)</b>\n\nTap «📱 Send number» or type your number (e.g. <code>+998901234567</code>).",
         "tr_bad_phone": "❗️ A phone number is required. Enter a valid number (e.g. +998901234567) or tap «📱 Send number».",
-        "tr_confirm": "🌐 <b>Your order:</b>\n\n{summary}\n\n<b>Is everything correct?</b>",
+        "tr_confirm": "🌍 <b>Your order:</b>\n\n{summary}\n\n<b>Is everything correct?</b>",
         "tr_thanks": "✅ <b>Order received!</b>\n\nOrder number: <b>#{no}</b>\nOur manager will contact you soon.",
         "tr_field": {
             "direction": "🔀 Service",
@@ -604,10 +604,10 @@ T = {
         "choose_lang": CHOOSE_LANG,
         "bot_description": "您好！欢迎使用 DCG Cargo 机器人！🚚\n\n物流服务、汇率查询及乌兹别克斯坦汽车清关费用计算。",
         "bot_short_description": "DCG Cargo 官方机器人 🚚",
-        "welcome": "👋 <b>您好！</b>\n\n🚚 欢迎使用 <b>DCGCargo</b> 机器人！\n\n请点击下方按钮 👇",
-        "btn_calc": "🚗 汽车清关费用计算",
+        "welcome": "👋 <b>您好！</b>\n\n🚚 欢迎使用 <b>DCG Cargo</b> 机器人！\n\n请在下方选择所需服务 👇",
+        "btn_calc": "🚗 汽车清关",
         "btn_info": "ℹ️ 说明",
-        "btn_lang": "🌐 切换语言",
+        "btn_lang": "🌐 语言",
         "btn_cancel": "❌ 取消",
         "btn_skip": "⏭ 跳过",
         "ask_fuel": "⛽️ 请选择燃料类型：",
@@ -619,9 +619,9 @@ T = {
         "bad_year": "❗️ 请输入正确的年份（例如：2022）。",
         "ask_cc": "🔧 请输入发动机排量，单位 cm³（例如：<code>1600</code>）：",
         "bad_cc": "❗️ 请用数字输入排量（500 – 10000）。",
-        "ask_price": "💵 请输入车辆价格，单位美元（例如：<code>15000</code>）：",
+        "ask_price": "💵 请输入车价，单位美元（例如：<code>15000</code>）：",
         "bad_num": "❗️ 请输入数字（例如：15000）。",
-        "ask_delivery": "🚚 运费是多少（$）？如果不清楚，请点击「跳过」。",
+        "ask_delivery": "🚚 运费是多少（$）？如不清楚，请点击「跳过」。",
         "cancelled": "已取消。",
         "too_old": "⛔️ <b>注意：</b>车龄超过 {max} 年的汽油/柴油车禁止进口到乌兹别克斯坦（该车车龄：{age} 年）。以下计算仅供参考。\n\n",
         "result": (
@@ -629,7 +629,7 @@ T = {
             "⛽️ 燃料：{fuel}\n"
             "📅 年份：{year}（{age} 年）\n"
             "{cc_line}"
-            "💵 价格：${price}\n"
+            "💵 车价：${price}\n"
             "🚚 运费：${delivery}\n"
             "🧾 完税价格：${value}\n"
             "💱 汇率：1$ = {rate} 苏姆\n\n"
@@ -652,7 +652,7 @@ T = {
             "• 增值税：12%（完税价格 + 关税）\n"
             "• 回收费：以 BCV 计，取决于排量和车龄\n"
             "• 1 BCV（基本计算单位）= {brv} 苏姆\n"
-            "• 汽油/柴油车：禁止进口车龄超过 {max} 年、低于欧5排放标准及右舵车辆\n\n"
+            "• 汽油/柴油车：禁止进口车龄超过 {max} 年、低于欧5排放标准或右舵的车辆\n\n"
             "汇率来源：乌兹别克斯坦中央银行（cbu.uz）。"
         ),
         # ---------- 物流 / 汇率 / 客服 ----------
@@ -661,7 +661,7 @@ T = {
         "btn_support": "🆘 客服",
         "support": (
             "🆘 <b>客服</b>\n\n"
-            "如有任何问题，请联系我们的管理员：\n\n"
+            "如有问题，请联系管理员：\n\n"
             "{admins}\n"
             "📞 电话：{phone}"
         ),
@@ -669,7 +669,7 @@ T = {
         # ---------- 汇率 ----------
         "cur_title": "💱 <b>汇率</b>（{date}）",
         "cur_sum": "苏姆",
-        "cur_source": "<i>来源：乌兹别克斯坦中央银行（cbu.uz）。▲▼ — 与昨日相比的变化。</i>",
+        "cur_source": "<i>来源：乌兹别克斯坦中央银行（cbu.uz）。▲▼ — 与昨日相比。</i>",
         "cur_btn_convert": "🧮 换算成苏姆",
         "cur_btn_refresh": "🔄 刷新",
         "cur_refreshed": "汇率已更新",
@@ -677,19 +677,19 @@ T = {
         "cur_ask_amount": "✍️ 请输入 {ccy} 金额（例如：<code>1000</code>）：",
         "cur_bad_amount": "❗️ 请用数字输入金额（例如：1500）。",
         "cur_result": "{flag} <b>{amount} {ccy} = {uzs} 苏姆</b>\n\n汇率：1 {ccy} = {rate} 苏姆（{date}，{src}）",
-        "cur_source_manual": "<i>来源：乌兹别克斯坦中央银行（cbu.uz）在所示日期的官方汇率。</i>",
-        "cur_source_alt": "<i>中央银行网站未响应，当前显示市场汇率（open.er-api.com），可能与央行汇率略有差异。</i>",
-        "cur_error": "⚠️ 暂时无法获取中央银行汇率，请稍后再试。",
+        "cur_source_manual": "<i>来源：乌兹别克斯坦中央银行（cbu.uz）官方汇率。</i>",
+        "cur_source_alt": "<i>中央银行网站未响应，当前显示市场汇率（open.er-api.com），可能与官方汇率略有差异。</i>",
+        "cur_error": "⚠️ 暂时无法获取汇率，请稍后再试。",
         "lg_intro": "🚚 <b>货运下单</b>\n\n请回答几个问题，我们的客服会尽快与您联系。",
         "lg_ask_origin": "📍 <b>在哪里提货？</b>\n\n请输入地址或点击「📍 发送位置」。",
         "lg_ask_destination": "🏁 <b>货物送到哪里？</b>\n\n请输入地址或点击「📍 发送位置」。",
         "lg_btn_location": "📍 发送位置",
-        "lg_bad_place": "❗️ 请输入文字地址或发送位置。",
+        "lg_bad_place": "❗️ 请输入地址或发送位置。",
         "lg_ask_cargo": "📦 <b>请选择货物类型：</b>",
         "lg_ask_cargo_other": "📦 请输入货物类型（例如：<code>汽车配件</code>）：",
         "lg_ask_weight": "⚖️ <b>货物大概重量：</b>",
         "lg_ask_volume": "📐 <b>货物大概体积：</b>",
-        "lg_ask_ready": "⏰ <b>货物什么时候准备好？</b>",
+        "lg_ask_ready": "⏰ <b>货物什么时候备好？</b>",
         "lg_ask_ready_other": "📅 请输入日期（例如：<code>11月15日</code>）：",
         "lg_ask_phone": "📱 <b>您的电话号码</b>\n\n请点击「📱 发送号码」或直接输入号码（例如：<code>+998901234567</code>）。",
         "lg_btn_phone": "📱 发送号码",
@@ -746,17 +746,17 @@ T = {
             "other": "📅 其他日期",
         },
         # ---------- 证书 ----------
-        "btn_cert": "📋 需要证书吗？",
-        "ct_intro": "📋 <b>是否需要证书</b>\n\n请回答几个关于货物的问题，我们的专家核实后会在这里回复您。",
+        "btn_cert": "📋 证书",
+        "ct_intro": "📋 <b>是否需要证书？</b>\n\n请回答几个关于货物的问题，专家核实后会在这里回复您。",
         "ct_ask_product": "📦 <b>商品名称和描述</b>\n\n例如：<code>儿童玩具，塑料，3岁以上</code>",
         "ct_ask_code": "🔢 <b>海关编码 (HS)</b>（如果知道）\n\n不知道请点击「跳过」。",
         "ct_ask_country": "🌍 <b>货物从哪个国家运来？</b>",
-        "ct_ask_purpose": "🎯 <b>货物进口用途是什么？</b>",
+        "ct_ask_purpose": "🎯 <b>进口货物的用途是什么？</b>",
         "ct_ask_file": "📎 <b>商品照片或文件</b>（发票、标签）\n\n请发送照片或文件。没有请点击「跳过」。",
         "ct_bad_text": "❗️ 请用文字输入。",
         "ct_bad_file": "❗️ 请发送照片或文件，或点击「跳过」。",
-        "ct_confirm": "📋 <b>您的申请：</b>\n\n{summary}\n\n<b>信息正确吗？</b>",
-        "ct_thanks": "✅ <b>申请已收到！</b>\n\n申请编号：<b>#{no}</b>\n我们的专家核实后会在这里回复您。",
+        "ct_confirm": "📋 <b>您的申请：</b>\n\n{summary}\n\n<b>信息是否正确？</b>",
+        "ct_thanks": "✅ <b>申请已收到！</b>\n\n申请编号：<b>#{no}</b>\n专家会在这里回复您。",
         "ct_answer": "📋 <b>专家回复（申请 #{no}）：</b>",
         "ct_file_yes": "📎 已附加",
         "ct_none": "—",
@@ -772,18 +772,18 @@ T = {
             "sale": "🏪 用于销售",
             "personal": "🏠 个人使用",
         },
-        "btn_trade": "🌍 进出口订单",
-        "tr_intro": "🌐 <b>进口 / 出口订单</b>\n\n请回答几个问题，我们的经理会与您联系。\n\n❗️ 订单必须留下<b>电话号码</b>。",
+        "btn_trade": "🌍 进出口",
+        "tr_intro": "🌍 <b>进出口订单</b>\n\n请回答几个问题，我们的经理会与您联系。\n\n❗️ 下单必须留下<b>电话号码</b>。",
         "tr_ask_direction": "🔀 <b>您需要哪项服务？</b>",
         "tr_ask_product": "📦 <b>商品名称</b>\n\n例如：<code>家用电器，2个集装箱</code>",
         "tr_ask_country_import": "🌍 <b>货物从哪个国家进口？</b>",
         "tr_ask_country_export": "🌍 <b>货物出口到哪个国家？</b>",
         "tr_ask_volume": "⚖️ <b>大约体积或重量</b>\n\n例如：<code>20吨</code>、<code>1辆货车</code>。不知道请点击「跳过」。",
         "tr_ask_name": "👤 <b>您的姓名或公司名称</b>",
-        "tr_ask_phone": "📱 <b>您的电话号码（必填）</b>\n\n没有电话号码无法接受订单。请点击「📱 发送号码」或直接输入（例如：<code>+998901234567</code>）。",
+        "tr_ask_phone": "📱 <b>您的电话号码（必填）</b>\n\n请点击「📱 发送号码」或直接输入（例如：<code>+998901234567</code>）。",
         "tr_bad_phone": "❗️ 电话号码为必填项。请输入正确的号码（例如：+998901234567）或点击「📱 发送号码」。",
-        "tr_confirm": "🌐 <b>您的订单：</b>\n\n{summary}\n\n<b>信息是否正确？</b>",
-        "tr_thanks": "✅ <b>订单已收到！</b>\n\n订单编号：<b>#{no}</b>\n我们的经理会尽快与您联系。",
+        "tr_confirm": "🌍 <b>您的订单：</b>\n\n{summary}\n\n<b>信息是否正确？</b>",
+        "tr_thanks": "✅ <b>订单已收到！</b>\n\n订单号：<b>#{no}</b>\n我们的经理会尽快与您联系。",
         "tr_field": {
             "direction": "🔀 服务",
             "product": "📦 商品",
@@ -797,4 +797,18 @@ T = {
             "export": "📤 出口",
         },
     },
+}
+
+# Eski tugma nomlari: foydalanuvchida eski klaviatura qolgan boʻlsa ham tugmalar ishlayveradi
+OLD_BTN = {
+    "btn_calc": ["🚗 Rastamojkani hisoblash", "🚗 Рассчитать растаможку",
+                 "🚗 Car customs calculator", "🚗 汽车清关费用计算"],
+    "btn_info": ["ℹ️ Ma'lumot", "ℹ️ Информация"],
+    "btn_lang": ["🌐 Tilni o'zgartirish", "🌐 Сменить язык", "🌐 Change language", "🌐 切换语言"],
+    "btn_support": ["🆘 Qo'llab-quvvatlash"],
+    "btn_currency": ["💱 Currency rates"],
+    "btn_cert": ["📋 Sertifikat kerakmi?", "📋 Нужен сертификат?",
+                 "📋 Need a certificate?", "📋 需要证书吗？"],
+    "btn_trade": ["🌍 Import / Eksport zakaz", "🌍 Заказ импорт / экспорт",
+                  "🌍 Import / Export order", "🌍 进出口订单"],
 }

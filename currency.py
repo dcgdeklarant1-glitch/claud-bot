@@ -183,12 +183,12 @@ def rates_text(lang: str, rates: dict) -> str:
 def rates_kb(lang):
     t = T[lang]
     return InlineKeyboardMarkup(inline_keyboard=[
-        [InlineKeyboardButton(text=t["cur_btn_convert"], callback_data="cur:conv", style="success")],
-        [InlineKeyboardButton(text=t["cur_btn_refresh"], callback_data="cur:refresh", style="primary")],
+        [InlineKeyboardButton(text=t["cur_btn_convert"], callback_data="cur:conv")],
+        [InlineKeyboardButton(text=t["cur_btn_refresh"], callback_data="cur:refresh")],
     ])
 
 def pick_kb(lang):
-    buttons = [InlineKeyboardButton(text=f"{FLAGS[c]} {c}", callback_data=f"cur:pick:{c}", style="primary")
+    buttons = [InlineKeyboardButton(text=f"{FLAGS[c]} {c}", callback_data=f"cur:pick:{c}")
                for c in CURRENCIES]
     rows = [buttons[i:i + 3] for i in range(0, len(buttons), 3)]
     return InlineKeyboardMarkup(inline_keyboard=rows)
