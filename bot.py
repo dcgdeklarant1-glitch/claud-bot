@@ -112,7 +112,7 @@ def staff_view(lang):
             continue
         text += f"\n\n<b>{t['staff_role'][role]}</b>"
         for i, p in people:
-            text += f"\n👤 {p['name']} — {p['phone']}"
+            text += f"\n{p['name']} — {p['phone']}"
             row = [InlineKeyboardButton(text=f"📞 {p['name']}", callback_data=f"staff:{i}")]
             if p.get("username"):
                 row.append(InlineKeyboardButton(text="✍️ Telegram", url=f"https://t.me/{p['username']}"))

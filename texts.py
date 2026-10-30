@@ -62,11 +62,11 @@ T = {
         "btn_logistics": "🚛 Xalqaro logistika",
         "btn_currency": "💱 Valyuta kursi",
         "btn_declarant": "👨‍💼 Deklarant xizmati",
-        "staff_title": "👨‍💼 <b>Deklarant xizmati</b>\n\nKerakli xodimni tanlang. 📞 tugmasini bossangiz, uning raqami keladi.",
+        "staff_title": "<b>Deklarant xizmati</b>\n\nKerakli xodimni tanlang. 📞 tugmasini bossangiz, uning raqami keladi.",
         "staff_role": {
-            "declarant": "🧾 Deklarantlar",
-            "logistics": "🚛 Logistika",
-            "manager": "💼 Menejerlar",
+            "declarant": "Deklarantlar",
+            "logistics": "Logistika",
+            "manager": "Menejerlar",
         },
         "btn_support": "📞 Menejer bilan bogʻlanish",
         "support": (
@@ -272,11 +272,11 @@ T = {
         "btn_logistics": "🚛 Международная логистика",
         "btn_currency": "💱 Курс валют",
         "btn_declarant": "👨‍💼 Услуги декларанта",
-        "staff_title": "👨‍💼 <b>Услуги декларанта</b>\n\nВыберите нужного сотрудника. Нажмите 📞, чтобы получить его номер.",
+        "staff_title": "<b>Услуги декларанта</b>\n\nВыберите нужного сотрудника. Нажмите 📞, чтобы получить его номер.",
         "staff_role": {
-            "declarant": "🧾 Декларанты",
-            "logistics": "🚛 Логистика",
-            "manager": "💼 Менеджеры",
+            "declarant": "Декларанты",
+            "logistics": "Логистика",
+            "manager": "Менеджеры",
         },
         "btn_support": "📞 Связаться с менеджером",
         "support": (
@@ -476,11 +476,11 @@ T = {
         "btn_logistics": "🚛 International logistics",
         "btn_currency": "💱 Exchange rates",
         "btn_declarant": "👨‍💼 Customs broker",
-        "staff_title": "👨‍💼 <b>Customs broker services</b>\n\nChoose the person you need. Tap 📞 to get their number.",
+        "staff_title": "<b>Customs broker services</b>\n\nChoose the person you need. Tap 📞 to get their number.",
         "staff_role": {
-            "declarant": "🧾 Customs brokers",
-            "logistics": "🚛 Logistics",
-            "manager": "💼 Managers",
+            "declarant": "Customs brokers",
+            "logistics": "Logistics",
+            "manager": "Managers",
         },
         "btn_support": "📞 Contact a manager",
         "support": (
@@ -680,11 +680,11 @@ T = {
         "btn_logistics": "🚛 国际物流",
         "btn_currency": "💱 汇率",
         "btn_declarant": "👨‍💼 报关员服务",
-        "staff_title": "👨‍💼 <b>报关员服务</b>\n\n请选择所需的工作人员，点击 📞 获取其电话号码。",
+        "staff_title": "<b>报关员服务</b>\n\n请选择所需的工作人员，点击 📞 获取其电话号码。",
         "staff_role": {
-            "declarant": "🧾 报关员",
-            "logistics": "🚛 物流",
-            "manager": "💼 经理",
+            "declarant": "报关员",
+            "logistics": "物流",
+            "manager": "经理",
         },
         "btn_support": "📞 联系经理",
         "support": (

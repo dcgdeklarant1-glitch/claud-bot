@@ -9,7 +9,6 @@ Yangi xodim qoʻshish uchun roʻyxatga bitta qator qoʻshing:
 
 STAFF = [
     {"role": "manager", "name": "DCG menejer", "phone": "+998555001113", "username": "DCG_manager"},
-    {"role": "manager", "name": "DCG admin", "phone": "+998555001113", "username": "Dcgadmin2229"},
 ]
 
 # Menyuda boʻlimlar shu tartibda chiqadi
