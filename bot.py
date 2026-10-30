@@ -22,6 +22,7 @@ import certificate
 import trade
 import admin
 import db
+import staff
 from calculator import calculate
 from texts import T, OLD_BTN
 
@@ -86,8 +87,8 @@ async def usd_rate() -> float:
 def main_kb(lang):
     t = T[lang]
     # Xizmatlar ikki ustunda (har qatorda 2 ta), rangsiz (shaffof) tugmalar
-    keys = ("btn_trade", "btn_calc", "btn_cert", "btn_logistics", "btn_currency",
-            "btn_support", "btn_info", "btn_lang")
+    keys = ("btn_trade", "btn_logistics", "btn_declarant", "btn_cert", "btn_calc",
+            "btn_support", "btn_currency", "btn_info", "btn_lang")
     buttons = [KeyboardButton(text=t[k]) for k in keys]
     return ReplyKeyboardMarkup(resize_keyboard=True, keyboard=[
         buttons[i:i + 2] for i in range(0, len(buttons), 2)
@@ -99,6 +100,24 @@ def support_kb(lang):
                               url=f"https://t.me/{u}")]
         for u in SUPPORT_USERNAMES
     ])
+
+def staff_view(lang):
+    """Deklarant xizmati: xodimlar boʻlimlarga ajratilgan, har biriga bogʻlanish tugmasi."""
+    t = T[lang]
+    text = t["staff_title"]
+    rows = []
+    for role in staff.ROLES:
+        people = [(i, p) for i, p in enumerate(staff.STAFF) if p["role"] == role]
+        if not people:
+            continue
+        text += f"\n\n<b>{t['staff_role'][role]}</b>"
+        for i, p in people:
+            text += f"\n👤 {p['name']} — {p['phone']}"
+            row = [InlineKeyboardButton(text=f"📞 {p['name']}", callback_data=f"staff:{i}")]
+            if p.get("username"):
+                row.append(InlineKeyboardButton(text="✍️ Telegram", url=f"https://t.me/{p['username']}"))
+            rows.append(row)
+    return text, InlineKeyboardMarkup(inline_keyboard=rows)
 
 def cancel_kb(lang, skip=False):
     t = T[lang]
@@ -201,6 +220,23 @@ async def support(m: Message, state: FSMContext):
     admins = "\n".join(f"👤 @{u}" for u in SUPPORT_USERNAMES)
     await m.answer(T[lang]["support"].format(admins=admins, phone=SUPPORT_PHONE),
                    reply_markup=support_kb(lang))
+
+@dp.message(F.text.in_(btn_texts("btn_declarant")))
+async def declarant_menu(m: Message, state: FSMContext):
+    await state.clear()
+    text, kb = staff_view(get_lang(m.from_user.id))
+    await m.answer(text, reply_markup=kb)
+
+@dp.callback_query(F.data.startswith("staff:"))
+async def staff_contact(c: CallbackQuery):
+    """Tanlangan xodimning kontakt kartasini yuboradi: mijoz bir bosishda qoʻngʻiroq qiladi."""
+    try:
+        p = staff.STAFF[int(c.data.split(":")[1])]
+    except (ValueError, IndexError):
+        return await c.answer()
+    role = T[get_lang(c.from_user.id)]["staff_role"][p["role"]]
+    await c.message.answer_contact(phone_number=p["phone"], first_name=p["name"], last_name=f"({role})")
+    await c.answer()
 
 @dp.message(Command("logistika"))
 @dp.message(F.text.in_(btn_texts("btn_logistics")))

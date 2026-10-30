@@ -8,7 +8,7 @@ T = {
         "bot_description": "Assalomu alaykum! DCG Cargo botiga xush kelibsiz! 🚚\n\nLogistika, valyuta kursi va avtomobil bojxona toʻlovlari hisobi.",
         "bot_short_description": "DCG Cargo rasmiy boti 🚚",
         "welcome": "👋 <b>Assalomu alaykum!</b>\n\n🚚 <b>DCG Cargo</b> botiga xush kelibsiz!\n\nKerakli boʻlimni tanlang 👇",
-        "btn_calc": "🚗 Bojxona hisobi",
+        "btn_calc": "💰 Bojxona kalkulyatori",
         "btn_info": "ℹ️ Maʼlumot",
         "btn_lang": "🌐 Til",
         "btn_cancel": "❌ Bekor qilish",
@@ -59,12 +59,19 @@ T = {
             "Kurs Oʻzbekiston Markaziy bankidan (cbu.uz) olinadi."
         ),
         # ---------- Logistika / valyuta / yordam ----------
-        "btn_logistics": "🚚 Logistika",
+        "btn_logistics": "🚛 Xalqaro logistika",
         "btn_currency": "💱 Valyuta kursi",
-        "btn_support": "🆘 Yordam",
+        "btn_declarant": "👨‍💼 Deklarant xizmati",
+        "staff_title": "👨‍💼 <b>Deklarant xizmati</b>\n\nKerakli xodimni tanlang. 📞 tugmasini bossangiz, uning raqami keladi.",
+        "staff_role": {
+            "declarant": "🧾 Deklarantlar",
+            "logistics": "🚛 Logistika",
+            "manager": "💼 Menejerlar",
+        },
+        "btn_support": "📞 Menejer bilan bogʻlanish",
         "support": (
-            "🆘 <b>Yordam</b>\n\n"
-            "Savollaringiz boʻlsa, administratorga yozing:\n\n"
+            "📞 <b>Menejer bilan bogʻlanish</b>\n\n"
+            "Savollaringiz boʻlsa, menejerimizga yozing:\n\n"
             "{admins}\n"
             "📞 Telefon: {phone}"
         ),
@@ -149,7 +156,7 @@ T = {
             "other": "📅 Boshqa sana",
         },
         # ---------- Sertifikat ----------
-        "btn_cert": "📋 Sertifikat",
+        "btn_cert": "📑 Sertifikatlashtirish",
         "ct_intro": "📋 <b>Sertifikat kerakmi?</b>\n\nTovar haqida bir nechta savolga javob bering. Mutaxassisimiz tekshirib, javobni shu yerga yuboradi.",
         "ct_ask_product": "📦 <b>Tovar nomi va tavsifi</b>\n\nMasalan: <code>bolalar oʻyinchogʻi, plastik, 3 yoshdan</code>",
         "ct_ask_code": "🔢 <b>TIF TN kodi</b> (bilsangiz)\n\nBilmasangiz, «Oʻtkazib yuborish»ni bosing.",
@@ -180,7 +187,7 @@ T = {
             "sale": "🏪 Sotish uchun",
             "personal": "🏠 Shaxsiy foydalanish uchun",
         },
-        "btn_trade": "🌍 Import / Eksport",
+        "btn_trade": "📦 Import / Eksport",
         "tr_intro": "🌍 <b>Import / eksport buyurtmasi</b>\n\nBir nechta savolga javob bering, menejerimiz siz bilan bogʻlanadi.\n\n❗️ Buyurtma faqat <b>telefon raqami</b> bilan qabul qilinadi.",
         "tr_ask_direction": "🔀 <b>Qaysi xizmat kerak?</b>",
         "tr_ask_product": "📦 <b>Tovar nomi</b>\n\nMasalan: <code>maishiy texnika, 2 ta konteyner</code>",
@@ -211,7 +218,7 @@ T = {
         "bot_description": "Здравствуйте! Добро пожаловать в бот DCG Cargo! 🚚\n\nЛогистика, курсы валют и расчёт растаможки авто.",
         "bot_short_description": "Официальный бот DCG Cargo 🚚",
         "welcome": "👋 <b>Здравствуйте!</b>\n\n🚚 Добро пожаловать в бот <b>DCG Cargo</b>!\n\nВыберите нужный раздел 👇",
-        "btn_calc": "🚗 Растаможка авто",
+        "btn_calc": "💰 Таможенный калькулятор",
         "btn_info": "ℹ️ Справка",
         "btn_lang": "🌐 Язык",
         "btn_cancel": "❌ Отмена",
@@ -262,12 +269,19 @@ T = {
             "Курс — Центральный банк Узбекистана (cbu.uz)."
         ),
         # ---------- Логистика / валюта / поддержка ----------
-        "btn_logistics": "🚚 Логистика",
+        "btn_logistics": "🚛 Международная логистика",
         "btn_currency": "💱 Курс валют",
-        "btn_support": "🆘 Поддержка",
+        "btn_declarant": "👨‍💼 Услуги декларанта",
+        "staff_title": "👨‍💼 <b>Услуги декларанта</b>\n\nВыберите нужного сотрудника. Нажмите 📞, чтобы получить его номер.",
+        "staff_role": {
+            "declarant": "🧾 Декларанты",
+            "logistics": "🚛 Логистика",
+            "manager": "💼 Менеджеры",
+        },
+        "btn_support": "📞 Связаться с менеджером",
         "support": (
-            "🆘 <b>Поддержка</b>\n\n"
-            "Если есть вопросы, напишите администратору:\n\n"
+            "📞 <b>Связаться с менеджером</b>\n\n"
+            "Если есть вопросы, напишите нашему менеджеру:\n\n"
             "{admins}\n"
             "📞 Телефон: {phone}"
         ),
@@ -352,7 +366,7 @@ T = {
             "other": "📅 Другая дата",
         },
         # ---------- Сертификат ----------
-        "btn_cert": "📋 Сертификат",
+        "btn_cert": "📑 Сертификация",
         "ct_intro": "📋 <b>Нужен ли сертификат?</b>\n\nОтветьте на несколько вопросов о товаре. Наш специалист проверит и пришлёт ответ сюда.",
         "ct_ask_product": "📦 <b>Название и описание товара</b>\n\nНапример: <code>детская игрушка, пластик, от 3 лет</code>",
         "ct_ask_code": "🔢 <b>Код ТН ВЭД</b> (если знаете)\n\nЕсли не знаете, нажмите «Пропустить».",
@@ -378,7 +392,7 @@ T = {
             "sale": "🏪 Для продажи",
             "personal": "🏠 Для личного пользования",
         },
-        "btn_trade": "🌍 Импорт / Экспорт",
+        "btn_trade": "📦 Импорт / Экспорт",
         "tr_intro": "🌍 <b>Заказ на импорт / экспорт</b>\n\nОтветьте на несколько вопросов, и наш менеджер свяжется с вами.\n\n❗️ Заказ принимается только с <b>номером телефона</b>.",
         "tr_ask_direction": "🔀 <b>Какая услуга нужна?</b>",
         "tr_ask_product": "📦 <b>Название товара</b>\n\nНапример: <code>бытовая техника, 2 контейнера</code>",
@@ -408,7 +422,7 @@ T = {
         "bot_description": "Hello! Welcome to the DCG Cargo bot! 🚚\n\nLogistics, exchange rates and car customs calculator for Uzbekistan.",
         "bot_short_description": "Official DCG Cargo bot 🚚",
         "welcome": "👋 <b>Hello!</b>\n\n🚚 Welcome to the <b>DCG Cargo</b> bot!\n\nChoose a section below 👇",
-        "btn_calc": "🚗 Car customs",
+        "btn_calc": "💰 Customs calculator",
         "btn_info": "ℹ️ Info",
         "btn_lang": "🌐 Language",
         "btn_cancel": "❌ Cancel",
@@ -459,12 +473,19 @@ T = {
             "Exchange rate: Central Bank of Uzbekistan (cbu.uz)."
         ),
         # ---------- Logistics / currency / support ----------
-        "btn_logistics": "🚚 Logistics",
+        "btn_logistics": "🚛 International logistics",
         "btn_currency": "💱 Exchange rates",
-        "btn_support": "🆘 Support",
+        "btn_declarant": "👨‍💼 Customs broker",
+        "staff_title": "👨‍💼 <b>Customs broker services</b>\n\nChoose the person you need. Tap 📞 to get their number.",
+        "staff_role": {
+            "declarant": "🧾 Customs brokers",
+            "logistics": "🚛 Logistics",
+            "manager": "💼 Managers",
+        },
+        "btn_support": "📞 Contact a manager",
         "support": (
-            "🆘 <b>Support</b>\n\n"
-            "If you have questions, message our administrators:\n\n"
+            "📞 <b>Contact a manager</b>\n\n"
+            "If you have questions, message our manager:\n\n"
             "{admins}\n"
             "📞 Phone: {phone}"
         ),
@@ -549,7 +570,7 @@ T = {
             "other": "📅 Other date",
         },
         # ---------- Certificate ----------
-        "btn_cert": "📋 Certificate",
+        "btn_cert": "📑 Certification",
         "ct_intro": "📋 <b>Do you need a certificate?</b>\n\nAnswer a few questions about your goods. Our specialist will check and reply here.",
         "ct_ask_product": "📦 <b>Product name and description</b>\n\nFor example: <code>children's toy, plastic, 3+ years</code>",
         "ct_ask_code": "🔢 <b>HS code</b> (if you know it)\n\nIf not, tap «Skip».",
@@ -575,7 +596,7 @@ T = {
             "sale": "🏪 For sale",
             "personal": "🏠 Personal use",
         },
-        "btn_trade": "🌍 Import / Export",
+        "btn_trade": "📦 Import / Export",
         "tr_intro": "🌍 <b>Import / export order</b>\n\nAnswer a few questions and our manager will contact you.\n\n❗️ Orders are accepted only with a <b>phone number</b>.",
         "tr_ask_direction": "🔀 <b>Which service do you need?</b>",
         "tr_ask_product": "📦 <b>Product name</b>\n\nFor example: <code>home appliances, 2 containers</code>",
@@ -605,7 +626,7 @@ T = {
         "bot_description": "您好！欢迎使用 DCG Cargo 机器人！🚚\n\n物流服务、汇率查询及乌兹别克斯坦汽车清关费用计算。",
         "bot_short_description": "DCG Cargo 官方机器人 🚚",
         "welcome": "👋 <b>您好！</b>\n\n🚚 欢迎使用 <b>DCG Cargo</b> 机器人！\n\n请在下方选择所需服务 👇",
-        "btn_calc": "🚗 汽车清关",
+        "btn_calc": "💰 清关计算器",
         "btn_info": "ℹ️ 说明",
         "btn_lang": "🌐 语言",
         "btn_cancel": "❌ 取消",
@@ -656,12 +677,19 @@ T = {
             "汇率来源：乌兹别克斯坦中央银行（cbu.uz）。"
         ),
         # ---------- 物流 / 汇率 / 客服 ----------
-        "btn_logistics": "🚚 物流",
+        "btn_logistics": "🚛 国际物流",
         "btn_currency": "💱 汇率",
-        "btn_support": "🆘 客服",
+        "btn_declarant": "👨‍💼 报关员服务",
+        "staff_title": "👨‍💼 <b>报关员服务</b>\n\n请选择所需的工作人员，点击 📞 获取其电话号码。",
+        "staff_role": {
+            "declarant": "🧾 报关员",
+            "logistics": "🚛 物流",
+            "manager": "💼 经理",
+        },
+        "btn_support": "📞 联系经理",
         "support": (
-            "🆘 <b>客服</b>\n\n"
-            "如有问题，请联系管理员：\n\n"
+            "📞 <b>联系经理</b>\n\n"
+            "如有问题，请联系我们的经理：\n\n"
             "{admins}\n"
             "📞 电话：{phone}"
         ),
@@ -746,7 +774,7 @@ T = {
             "other": "📅 其他日期",
         },
         # ---------- 证书 ----------
-        "btn_cert": "📋 证书",
+        "btn_cert": "📑 认证",
         "ct_intro": "📋 <b>是否需要证书？</b>\n\n请回答几个关于货物的问题，专家核实后会在这里回复您。",
         "ct_ask_product": "📦 <b>商品名称和描述</b>\n\n例如：<code>儿童玩具，塑料，3岁以上</code>",
         "ct_ask_code": "🔢 <b>海关编码 (HS)</b>（如果知道）\n\n不知道请点击「跳过」。",
@@ -772,7 +800,7 @@ T = {
             "sale": "🏪 用于销售",
             "personal": "🏠 个人使用",
         },
-        "btn_trade": "🌍 进出口",
+        "btn_trade": "📦 进出口",
         "tr_intro": "🌍 <b>进出口订单</b>\n\n请回答几个问题，我们的经理会与您联系。\n\n❗️ 下单必须留下<b>电话号码</b>。",
         "tr_ask_direction": "🔀 <b>您需要哪项服务？</b>",
         "tr_ask_product": "📦 <b>商品名称</b>\n\n例如：<code>家用电器，2个集装箱</code>",
@@ -810,5 +838,10 @@ OLD_BTN = {
     "btn_cert": ["📋 Sertifikat kerakmi?", "📋 Нужен сертификат?",
                  "📋 Need a certificate?", "📋 需要证书吗？"],
     "btn_trade": ["🌍 Import / Eksport zakaz", "🌍 Заказ импорт / экспорт",
-                  "🌍 Import / Export order", "🌍 进出口订单"],
+                  "🌍 Import / Export order", "🌍 进出口订单",
+                  "🌍 Import / Eksport", "🌍 Импорт / Экспорт", "🌍 Import / Export", "🌍 进出口"],
+    "btn_logistics": ["🚚 Logistika", "🚚 Логистика", "🚚 Logistics", "🚚 物流"],
 }
+OLD_BTN["btn_calc"] += ["🚗 Bojxona hisobi", "🚗 Растаможка авто", "🚗 Car customs", "🚗 汽车清关"]
+OLD_BTN["btn_cert"] += ["📋 Sertifikat", "📋 Сертификат", "📋 Certificate", "📋 证书"]
+OLD_BTN["btn_support"] += ["🆘 Yordam", "🆘 Поддержка", "🆘 Support", "🆘 客服"]
