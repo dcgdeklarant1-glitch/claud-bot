@@ -91,19 +91,27 @@ async def init():
     global _pool, _lite
     url = os.getenv("DATABASE_URL", "").strip()
     if url:
-        import asyncpg
-        # Neon havolasidagi ?sslmode=...&channel_binding=... ni asyncpg tushunmaydi
-        parts = urlsplit(url)
-        dsn = urlunsplit(parts._replace(query=""))
-        _pool = await asyncpg.create_pool(dsn, ssl="require", min_size=1, max_size=3,
-                                          max_inactive_connection_lifetime=60)
-        async with _pool.acquire() as con:
-            await con.execute(SCHEMA.format(serial="SERIAL PRIMARY KEY"))
-        logging.info("Baza: Postgres ulandi")
-    else:
-        _lite = sqlite3.connect(SQLITE_FILE)
-        _lite.row_factory = sqlite3.Row
-        _lite.executescript(SCHEMA.format(serial="INTEGER PRIMARY KEY AUTOINCREMENT"))
+        try:
+            import asyncpg
+            # Neon havolasidagi ?sslmode=...&channel_binding=... ni asyncpg tushunmaydi
+            parts = urlsplit(url)
+            dsn = urlunsplit(parts._replace(query=""))
+            # min_size=0: ishlatilmagan ulanish ochiq turmaydi, Neon uxlay oladi (bepul limit tejaladi)
+            pool = await asyncpg.create_pool(dsn, ssl="require", min_size=0, max_size=3,
+                                             max_inactive_connection_lifetime=30)
+            async with pool.acquire() as con:
+                await con.execute(SCHEMA.format(serial="SERIAL PRIMARY KEY"))
+            _pool = pool
+            logging.info("Baza: Postgres ulandi")
+            return
+        except Exception as e:
+            # Baza ishlamasa ham bot to'xtamasin: vaqtincha lokal faylga yozamiz
+            logging.error("Postgres'ga ulanib bo'lmadi, vaqtincha lokal %s ishlatiladi: %r",
+                          SQLITE_FILE.name, e)
+    _lite = sqlite3.connect(SQLITE_FILE)
+    _lite.row_factory = sqlite3.Row
+    _lite.executescript(SCHEMA.format(serial="INTEGER PRIMARY KEY AUTOINCREMENT"))
+    if not url:
         logging.warning("DATABASE_URL yo'q: ma'lumotlar lokal %s fayliga yoziladi", SQLITE_FILE.name)
 
 
