@@ -847,11 +847,11 @@ OLD_BTN["btn_cert"] += ["📋 Sertifikat", "📋 Сертификат", "📋 Ce
 OLD_BTN["btn_support"] += ["🆘 Yordam", "🆘 Поддержка", "🆘 Support", "🆘 客服"]
 
 
-# ---------- Fura / tyagach / prisep: boʻlib toʻlash va lizing soʻrovnomasi ----------
+# ---------- Fura / tyagach / prisep: boʻlib toʻlash, naqd yoki karta orqali xarid soʻrovnomasi ----------
 VH = {
     "uz": {
         "btn_vehicles": "🚚 Fura, tyagach, prisep",
-        "vh_intro": "🚛 <b>Fura, tyagach va prisep — boʻlib toʻlash va lizing</b>\n\nQanday texnika kerakligini va sizga qulay toʻlov shartlarini tanlang. Menejerimiz siz bilan bogʻlanib, takliflarni aytadi.\n\n❗️ Ariza faqat <b>telefon raqami</b> bilan qabul qilinadi.",
+        "vh_intro": "🚛 <b>Fura, tyagach va prisep — boʻlib toʻlash</b>\n\nQanday texnika kerakligini va sizga qulay toʻlov shartlarini tanlang. Menejerimiz siz bilan bogʻlanib, takliflarni aytadi.\n\n❗️ Ariza faqat <b>telefon raqami</b> bilan qabul qilinadi.",
         "vh_ask_type": "🚛 <b>Qanday texnika kerak?</b>",
         "vh_ask_trailer": "🚚 <b>Prisep turi:</b>",
         "vh_ask_condition": "🔧 <b>Yangi yoki ishlatilgan?</b>",
@@ -874,13 +874,13 @@ VH = {
                        "dump": "Samosval", "tank": "Sisterna", "other": "Boshqa"},
         "vh_condition": {"new": "Yangi", "used": "Ishlatilgan", "any": "Farqi yoʻq"},
         "vh_count": {"c1": "1 ta", "c2": "2–3 ta", "c4": "4–9 ta", "c10": "10 va undan koʻp"},
-        "vh_pay": {"installment": "📆 Boʻlib toʻlash", "leasing": "🏦 Lizing", "cash": "💵 Naqd (bir yoʻla)"},
+        "vh_pay": {"installment": "📆 Boʻlib toʻlash", "cash": "💵 Naqd", "card": "💳 Bank kartasi orqali"},
         "vh_down": {"d0": "Boshlangʻich toʻlovsiz", "d10": "10–20%", "d20": "20–30%", "d30": "30% dan koʻp"},
         "vh_term": {"t12": "12 oy", "t24": "24 oy", "t36": "36 oy", "t48": "48 oy va koʻp"},
     },
     "ru": {
         "btn_vehicles": "🚚 Фуры, тягачи, прицепы",
-        "vh_intro": "🚛 <b>Фуры, тягачи и прицепы — рассрочка и лизинг</b>\n\nВыберите, какая техника нужна и какие условия оплаты вам удобны. Наш менеджер свяжется с вами и предложит варианты.\n\n❗️ Заявка принимается только с <b>номером телефона</b>.",
+        "vh_intro": "🚛 <b>Фуры, тягачи и прицепы — в рассрочку</b>\n\nВыберите, какая техника нужна и какие условия оплаты вам удобны. Наш менеджер свяжется с вами и предложит варианты.\n\n❗️ Заявка принимается только с <b>номером телефона</b>.",
         "vh_ask_type": "🚛 <b>Какая техника нужна?</b>",
         "vh_ask_trailer": "🚚 <b>Тип прицепа:</b>",
         "vh_ask_condition": "🔧 <b>Новая или б/у?</b>",
@@ -903,13 +903,13 @@ VH = {
                        "dump": "Самосвал", "tank": "Цистерна", "other": "Другой"},
         "vh_condition": {"new": "Новая", "used": "Б/у", "any": "Не важно"},
         "vh_count": {"c1": "1", "c2": "2–3", "c4": "4–9", "c10": "10 и больше"},
-        "vh_pay": {"installment": "📆 Рассрочка", "leasing": "🏦 Лизинг", "cash": "💵 Наличные (сразу)"},
+        "vh_pay": {"installment": "📆 Рассрочка", "cash": "💵 Наличные", "card": "💳 Банковской картой"},
         "vh_down": {"d0": "Без первого взноса", "d10": "10–20%", "d20": "20–30%", "d30": "Больше 30%"},
         "vh_term": {"t12": "12 мес.", "t24": "24 мес.", "t36": "36 мес.", "t48": "48 мес. и больше"},
     },
     "en": {
         "btn_vehicles": "🚚 Trucks, tractors, trailers",
-        "vh_intro": "🚛 <b>Trucks, tractor units and trailers — installments and leasing</b>\n\nChoose the vehicle you need and the payment terms that suit you. Our manager will contact you with offers.\n\n❗️ Requests are accepted only with a <b>phone number</b>.",
+        "vh_intro": "🚛 <b>Trucks, tractor units and trailers — in installments</b>\n\nChoose the vehicle you need and the payment terms that suit you. Our manager will contact you with offers.\n\n❗️ Requests are accepted only with a <b>phone number</b>.",
         "vh_ask_type": "🚛 <b>What do you need?</b>",
         "vh_ask_trailer": "🚚 <b>Trailer type:</b>",
         "vh_ask_condition": "🔧 <b>New or used?</b>",
@@ -932,13 +932,13 @@ VH = {
                        "dump": "Tipper", "tank": "Tanker", "other": "Other"},
         "vh_condition": {"new": "New", "used": "Used", "any": "Doesn't matter"},
         "vh_count": {"c1": "1", "c2": "2–3", "c4": "4–9", "c10": "10 or more"},
-        "vh_pay": {"installment": "📆 Installments", "leasing": "🏦 Leasing", "cash": "💵 Cash (full)"},
+        "vh_pay": {"installment": "📆 Installments", "cash": "💵 Cash", "card": "💳 Bank card"},
         "vh_down": {"d0": "No down payment", "d10": "10–20%", "d20": "20–30%", "d30": "Over 30%"},
         "vh_term": {"t12": "12 months", "t24": "24 months", "t36": "36 months", "t48": "48+ months"},
     },
     "zh": {
         "btn_vehicles": "🚚 卡车、牵引车、挂车",
-        "vh_intro": "🚛 <b>卡车、牵引车和挂车 — 分期付款和租赁</b>\n\n请选择所需车辆和方便的付款条件。我们的经理会联系您并提供方案。\n\n❗️ 申请必须留下<b>电话号码</b>。",
+        "vh_intro": "🚛 <b>卡车、牵引车和挂车 — 分期付款</b>\n\n请选择所需车辆和方便的付款条件。我们的经理会联系您并提供方案。\n\n❗️ 申请必须留下<b>电话号码</b>。",
         "vh_ask_type": "🚛 <b>您需要什么车辆？</b>",
         "vh_ask_trailer": "🚚 <b>挂车类型：</b>",
         "vh_ask_condition": "🔧 <b>新车还是二手？</b>",
@@ -961,7 +961,7 @@ VH = {
                        "dump": "自卸挂车", "tank": "罐式挂车", "other": "其他"},
         "vh_condition": {"new": "新车", "used": "二手", "any": "都可以"},
         "vh_count": {"c1": "1辆", "c2": "2–3辆", "c4": "4–9辆", "c10": "10辆以上"},
-        "vh_pay": {"installment": "📆 分期付款", "leasing": "🏦 租赁", "cash": "💵 一次性付款"},
+        "vh_pay": {"installment": "📆 分期付款", "cash": "💵 现金", "card": "💳 银行卡"},
         "vh_down": {"d0": "无首付", "d10": "10–20%", "d20": "20–30%", "d30": "30%以上"},
         "vh_term": {"t12": "12个月", "t24": "24个月", "t36": "36个月", "t48": "48个月以上"},
     },
