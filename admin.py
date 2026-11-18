@@ -236,7 +236,7 @@ async def build_xlsx() -> bytes:
                     + [d.get("region"), d.get("name")])
     sheets.append(("Fura-tyagach-prisep",
                    ["№", "Sana", "Mijoz ID", "Ism (Telegram)", "Telefon", "Texnika", "Prisep turi", "Holati",
-                    "Soni", "To'lov", "Boshlang'ich to'lov", "Muddat", "Hudud", "Ism / kompaniya"], rows))
+                    "Soni", "To'lov", "Hudud", "Ism / kompaniya"], rows))
 
     rows = []
     for r in await db.fetch("SELECT o.*, u.name FROM orders o LEFT JOIN users u ON u.id = o.user_id ORDER BY o.no"):

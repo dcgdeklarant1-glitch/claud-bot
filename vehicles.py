@@ -1,4 +1,4 @@
-"""Fura, tyagach va prisep: bo'lib to'lash, naqd yoki bank kartasi orqali xarid so'rovnomasi.
+"""Fura, tyagach va prisep: naqd yoki bank kartasi orqali xarid so'rovnomasi.
 
 Mijoz qanday texnika kerakligini va qulay xarid shartlarini tanlaydi,
 telefon raqamini qoldiradi; ariza bazaga yoziladi va adminga yuboriladi.
@@ -21,11 +21,9 @@ OPTIONS = {
     "trailer": ("tent", "ref", "platform", "dump", "tank", "other"),
     "condition": ("new", "used", "any"),
     "count": ("c1", "c2", "c4", "c10"),
-    "pay": ("installment", "cash", "card"),
-    "down": ("d0", "d10", "d20", "d30"),
-    "term": ("t12", "t24", "t36", "t48"),
+    "pay": ("cash", "card"),
 }
-FIELDS = ("type", "trailer", "condition", "count", "pay", "down", "term", "region", "name", "phone")
+FIELDS = ("type", "trailer", "condition", "count", "pay", "region", "name", "phone")
 
 
 class Veh(StatesGroup):
@@ -34,8 +32,6 @@ class Veh(StatesGroup):
     condition = State()
     count = State()
     pay = State()
-    down = State()
-    term = State()
     region = State()
     name = State()
     phone = State()
@@ -43,13 +39,11 @@ class Veh(StatesGroup):
 
 
 def next_field(d: dict, field: str) -> str:
-    """Keyingi savol: prisep turi faqat prisep/furada, to'lov shartlari faqat bo'lib to'lashda so'raladi."""
+    """Keyingi savol: prisep turi faqat prisep yoki fura tanlanganda so'raladi."""
     i = FIELDS.index(field) + 1
     while True:
         f = FIELDS[i]
         if f == "trailer" and d.get("type") == "tractor":
-            i += 1
-        elif f in ("down", "term") and d.get("pay") != "installment":
             i += 1
         else:
             return f
@@ -120,8 +114,6 @@ def build_router(get_lang, main_kb, cancel_kb):
         await state.update_data(**{field: key})
         if field == "type" and key == "tractor":
             await state.update_data(trailer=None)
-        if field == "pay" and key != "installment":
-            await state.update_data(down=None, term=None)
         await c.message.edit_text(f"{t['vh_field'][field]}: ✅ {t['vh_' + field][key]}")
         await c.answer()
         await ask(c.message, state, next_field(await state.get_data(), field), lang)
@@ -131,8 +123,6 @@ def build_router(get_lang, main_kb, cancel_kb):
     @router.message(Veh.condition)
     @router.message(Veh.count)
     @router.message(Veh.pay)
-    @router.message(Veh.down)
-    @router.message(Veh.term)
     @router.message(Veh.confirm)
     async def use_buttons(m: Message):
         await m.answer(T[get_lang(m.from_user.id)]["lg_use_buttons"])
