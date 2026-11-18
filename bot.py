@@ -20,6 +20,7 @@ import logistics
 import currency
 import certificate
 import trade
+import vehicles
 import admin
 import db
 import staff
@@ -87,7 +88,7 @@ async def usd_rate() -> float:
 def main_kb(lang):
     t = T[lang]
     # Xizmatlar ikki ustunda (har qatorda 2 ta), rangsiz (shaffof) tugmalar
-    keys = ("btn_trade", "btn_logistics", "btn_declarant", "btn_cert", "btn_calc",
+    keys = ("btn_trade", "btn_vehicles", "btn_logistics", "btn_declarant", "btn_cert", "btn_calc",
             "btn_support", "btn_currency", "btn_info", "btn_lang")
     buttons = [KeyboardButton(text=t[k]) for k in keys]
     return ReplyKeyboardMarkup(resize_keyboard=True, keyboard=[
@@ -163,6 +164,7 @@ logistics_router, logistics_start = logistics.build_router(get_lang, main_kb, ca
 currency_router, currency_start = currency.build_router(get_lang, main_kb, cancel_kb)
 cert_router, cert_start = certificate.build_router(get_lang, main_kb, cancel_kb)
 trade_router, trade_start = trade.build_router(get_lang, main_kb, cancel_kb)
+vehicles_router, vehicles_start = vehicles.build_router(get_lang, main_kb, cancel_kb)
 
 
 # ---------- Logotip: salomlashuv xabari logotip bilan chiqadi ----------
@@ -255,6 +257,11 @@ async def cert_menu(m: Message, state: FSMContext):
 @dp.message(F.text.in_(btn_texts("btn_trade")))
 async def trade_menu(m: Message, state: FSMContext):
     await trade_start(m, state)
+
+@dp.message(Command("texnika"))
+@dp.message(F.text.in_(btn_texts("btn_vehicles")))
+async def vehicles_menu(m: Message, state: FSMContext):
+    await vehicles_start(m, state)
 
 @dp.message(Command("setlogo"))
 async def set_logo(m: Message):
@@ -380,6 +387,7 @@ dp.include_router(logistics_router)
 dp.include_router(currency_router)
 dp.include_router(cert_router)
 dp.include_router(trade_router)
+dp.include_router(vehicles_router)
 dp.include_router(admin.build_router())
 
 

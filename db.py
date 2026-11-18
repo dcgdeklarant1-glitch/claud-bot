@@ -1,4 +1,5 @@
 """Ma'lumotlar bazasi: mijozlar, logistika buyurtmalari, import/eksport zakazlari,
+fura/tyagach/prisep arizalari,
 sertifikat arizalari, hisob-kitoblar.
 
 Serverda (Render) — Neon Postgres (DATABASE_URL). DATABASE_URL bo'lmasa, lokal SQLite
@@ -50,6 +51,15 @@ CREATE TABLE IF NOT EXISTS trades (
     phone TEXT NOT NULL,
     direction TEXT,
     product TEXT,
+    data TEXT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS vehicles (
+    no {serial},
+    created TEXT NOT NULL,
+    user_id BIGINT NOT NULL,
+    phone TEXT NOT NULL,
+    type TEXT,
+    pay TEXT,
     data TEXT NOT NULL
 );
 CREATE TABLE IF NOT EXISTS calcs (
@@ -173,6 +183,17 @@ async def add_trade(user, data: dict) -> int:
         "INSERT INTO trades (created, user_id, phone, direction, product, data) "
         "VALUES ($1, $2, $3, $4, $5, $6) RETURNING no",
         now(), user.id, data["phone"], data.get("direction"), data.get("product"),
+        json.dumps(data, ensure_ascii=False))
+
+
+# ---------- Fura / tyagach / prisep arizalari ----------
+async def add_vehicle(user, data: dict) -> int:
+    await touch_user(user)
+    await set_phone(user.id, data["phone"])
+    return await fetchval(
+        "INSERT INTO vehicles (created, user_id, phone, type, pay, data) "
+        "VALUES ($1, $2, $3, $4, $5, $6) RETURNING no",
+        now(), user.id, data["phone"], data.get("type"), data.get("pay"),
         json.dumps(data, ensure_ascii=False))
 
 
